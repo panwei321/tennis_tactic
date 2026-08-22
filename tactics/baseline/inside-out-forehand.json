@@ -1,0 +1,66 @@
+{
+  "id": "inside-out-forehand",
+  "name": "正手 Inside-Out 制胜分",
+  "category": "底线战术",
+  "introduction": "相持中主动侧身到反手位用正手发力，强攻对手反手区的深球，是底线进攻的经典武器。",
+  "purpose": "用最强正手替代相对弱势的反手，压制对手反手，逼迫其回出浅球或失误，为下一拍制胜创造机会。",
+  "scenarios": "底线相持中自己脚步到位、体能充沛时；对手反手明显偏弱或站位靠左时；关键分上需要主动变线施压时。",
+  "tips": "侧身要早、击球点要在身体前方；击球后迅速回位，防止对手直线偷袭空出的反手区；连续侧身很耗体能，需量力而行。",
+  "protocolVersion": "1.0",
+  "script": {
+    "meta": {
+      "id": "inside-out-forehand-v1",
+      "name": "正手 Inside-Out 制胜分",
+      "description": "侧身正手强攻对手反手区，对手回浅后上步抢攻空档",
+      "duration": 4300,
+      "version": "1.0",
+      "author": "tennis_tactic"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "surfaceColor": "#0084D4",
+      "lineColor": "#FFFFFF",
+      "courtRect": { "x": 80, "y": 40, "w": 560, "h": 1200 },
+      "netPosition": 640
+    },
+    "elements": [
+      { "id": "attacker", "type": "player", "label": "我方", "color": "#1565C0", "radius": 18, "initPos": [360, 1230] },
+      { "id": "defender", "type": "player", "label": "对手", "color": "#C62828", "radius": 18, "initPos": [360, 50] },
+      { "id": "ball", "type": "ball", "label": "", "color": "#CCFF00", "radius": 6, "initPos": [400, 1225] }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "actions": [
+          { "type": "text", "content": "相持中，我方主动侧身让开正手", "pos": [80, 1100], "dur": 900, "style": { "fontSize": 16, "color": "#FFFFFF", "bg": "rgba(21,101,192,0.8)" } },
+          { "type": "move", "target": "attacker", "from": [360, 1230], "to": [450, 1215], "dur": 500, "easing": "easeInOutQuad" }
+        ]
+      },
+      {
+        "t": 1000,
+        "actions": [
+          { "type": "text", "content": "正手 Inside-Out，强攻对手反手区深处", "pos": [80, 1060], "dur": 1000, "style": { "fontSize": 16, "color": "#FFFFFF", "bg": "rgba(21,101,192,0.8)" } },
+          { "type": "trajectory", "target": "ball", "waypoints": [[450, 1215], [330, 640], [220, 150]], "curve": "catmullrom", "dur": 800, "easing": "linear", "showBounceMark": false },
+          { "type": "move", "target": "defender", "from": [360, 50], "to": [230, 210], "dur": 800, "easing": "easeInOutQuad" }
+        ]
+      },
+      {
+        "t": 2000,
+        "actions": [
+          { "type": "text", "content": "对手反手被动，回球出浅", "pos": [80, 1060], "dur": 800, "style": { "fontSize": 16, "color": "#FFFFFF", "bg": "rgba(198,40,40,0.8)" } },
+          { "type": "trajectory", "target": "ball", "waypoints": [[220, 180], [380, 640], [390, 920]], "curve": "catmullrom", "dur": 700, "easing": "linear", "showBounceMark": false },
+          { "type": "move", "target": "defender", "from": [230, 210], "to": [350, 180], "dur": 800, "easing": "easeInOutQuad" }
+        ]
+      },
+      {
+        "t": 2800,
+        "actions": [
+          { "type": "text", "content": "我方上步抢攻空档，正手制胜！", "pos": [80, 1060], "dur": 1200, "style": { "fontSize": 18, "color": "#FFFFFF", "bg": "rgba(21,101,192,0.9)" } },
+          { "type": "move", "target": "attacker", "from": [450, 1215], "to": [370, 1050], "dur": 700, "easing": "easeInOutQuad" },
+          { "type": "trajectory", "target": "ball", "waypoints": [[390, 920], [420, 640], [560, 120]], "curve": "catmullrom", "dur": 600, "easing": "linear", "showBounceMark": true }
+        ]
+      }
+    ]
+  }
+}

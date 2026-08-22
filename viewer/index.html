@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网球战术动画库 - ASDL Viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>🎾 网球战术动画库</h1>
+      <span class="subtitle">ASDL v1.0 · <a href="../docs/asdl-spec.md" target="_blank">协议文档</a></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左侧：战术列表 -->
+    <aside class="sidebar">
+      <input id="searchBox" type="search" placeholder="搜索战术名称…" autocomplete="off">
+      <nav id="tacticList" class="tactic-list" aria-label="战术列表"></nav>
+    </aside>
+
+    <!-- 右侧：播放器 + 介绍 -->
+    <section class="content">
+      <div id="loadError" class="load-error" hidden></div>
+
+      <div id="playerPanel" class="player-panel" hidden>
+        <div class="player-main">
+          <div class="canvas-wrap">
+            <canvas id="courtCanvas"></canvas>
+          </div>
+          <div class="controls">
+            <button id="btnPlay" class="btn primary" title="播放/暂停">▶</button>
+            <button id="btnReplay" class="btn" title="重播">⟲</button>
+            <button id="btnSpeed" class="btn" title="倍速">1x</button>
+            <span id="timeLabel" class="time-label">0.0s / 0.0s</span>
+            <input id="progressBar" class="progress" type="range" min="0" max="1000" value="0" step="1">
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h2 id="tacticName"></h2>
+          <p id="tacticCategory" class="category-tag"></p>
+
+          <div class="info-block" id="blockIntroduction">
+            <h3>简介</h3>
+            <p></p>
+          </div>
+          <div class="info-block" id="blockPurpose">
+            <h3>战术目的</h3>
+            <p></p>
+          </div>
+          <div class="info-block" id="blockScenarios">
+            <h3>适用场景</h3>
+            <p></p>
+          </div>
+          <div class="info-block" id="blockTips">
+            <h3>注意事项</h3>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="tactic-preview.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

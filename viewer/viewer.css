@@ -1,0 +1,199 @@
+/* viewer.css - ASDL 战术预览器样式 */
+:root {
+  --bg: #101418;
+  --panel: #1a2129;
+  --panel-2: #212a34;
+  --text: #e8edf2;
+  --text-dim: #8a97a5;
+  --accent: #c9ff00;
+  --accent-2: #0084d4;
+  --border: #2c3743;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.topbar h1 { font-size: 18px; margin: 0; }
+.subtitle { color: var(--text-dim); font-size: 13px; }
+.subtitle a { color: var(--accent-2); text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
+
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 20px;
+  min-height: calc(100vh - 60px);
+}
+
+/* ---------- 侧栏列表 ---------- */
+.sidebar { display: flex; flex-direction: column; gap: 12px; }
+
+#searchBox {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+}
+#searchBox:focus { border-color: var(--accent-2); }
+
+.tactic-list { overflow-y: auto; }
+
+.list-group-title {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 14px 4px 6px;
+  letter-spacing: 1px;
+}
+.list-group-title:first-child { margin-top: 0; }
+
+.list-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+}
+.list-item:hover { background: var(--panel-2); }
+.list-item.active {
+  background: var(--panel-2);
+  border-color: var(--accent-2);
+}
+
+/* ---------- 播放区 ---------- */
+.content { min-width: 0; }
+
+.load-error {
+  background: #3a1f24;
+  border: 1px solid #7a3540;
+  color: #ffb3bd;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.player-panel {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.canvas-wrap {
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+#courtCanvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 720 / 1280;
+}
+
+.controls {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 8px;
+  min-width: 40px;
+  height: 34px;
+  padding: 0 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--panel-2); }
+.btn.primary { background: var(--accent-2); border-color: var(--accent-2); color: #fff; }
+.btn.primary:hover { filter: brightness(1.1); }
+
+.time-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress { flex: 1; accent-color: var(--accent-2); }
+
+/* ---------- 介绍区 ---------- */
+.info-panel h2 { margin: 4px 0 6px; font-size: 20px; }
+.category-tag {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--accent);
+  background: rgba(201, 255, 0, 0.08);
+  border: 1px solid rgba(201, 255, 0, 0.25);
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin: 0 0 8px;
+}
+
+.info-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+.info-block h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--accent-2);
+}
+.info-block p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+.info-block.empty { display: none; }
+
+/* ---------- 移动端 ---------- */
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .player-panel { grid-template-columns: 1fr; }
+  .sidebar { max-height: 40vh; }
+}

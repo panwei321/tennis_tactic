@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+
+# 导出中间文件（含数据库原始数据，勿提交，清理后再导入）
+tools/export.json
+tools/export.json.tmp
+
+# 本地临时文件
+*.log
