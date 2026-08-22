@@ -1,0 +1,44 @@
+name: Deploy viewer to GitHub Pages
+
+# 推送到 main 自动把 viewer/ 部署到 GitHub Pages
+# 首次使用需在仓库 Settings → Pages → Build and deployment → Source 选择 "GitHub Actions"
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # 部署前重建索引：同时充当格式校验，脚本不合法则部署失败
+      - name: Build index (validate tactics)
+        run: node tools/build-index.js
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r viewer _site/viewer
+          cp -r docs _site/docs
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,7 +6,22 @@
 
 > 本仓库只包含**战术脚本数据、协议文档和网页播放器**，不包含任何 App / 后端业务代码。
 
-## 快速开始
+**发球上网**（草地 · 发球战术） · **正手 Inside-Out 制胜分**（硬地 · 底线战术）
+
+<p>
+  <img src="docs/images/demo.gif" width="280" alt="发球上网战术动画演示">
+  <img src="docs/images/inside-out-forehand.gif" width="280" alt="正手 Inside-Out 战术动画演示">
+</p>
+
+## 在线预览
+
+推送到 GitHub 后，Pages 工作流（`.github/workflows/deploy-pages.yml`）会自动部署网页播放器，无需 clone 即可在线浏览：
+
+`https://<你的GitHub用户名>.github.io/tennis-tactic/viewer/`
+
+> 首次使用需在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**（一次性设置）。
+
+## 快速开始（本地运行）
 
 ```bash
 git clone <本仓库地址>
@@ -31,7 +46,8 @@ tennis_tactic/
 │   └── serving/            #   发球战术
 │       └── serve-and-volley.json
 ├── docs/
-│   └── asdl-spec.md        # ASDL 协议规范（二次开发必读）
+│   ├── asdl-spec.md        # ASDL 协议规范（二次开发必读）
+│   └── images/             # 文档图片（README 演示 GIF 等）
 ├── viewer/                 # 网页播放器（零依赖，可直接嵌入你的页面）
 │   ├── index.html          #   战术库预览页
 │   ├── tactic-preview.js   #   ASDL 播放引擎（Canvas 2D 参考实现）
@@ -40,7 +56,8 @@ tennis_tactic/
 └── tools/
     ├── export_tactics.sql  # 从 MySQL 业务库导出战术（维护者用）
     ├── import_export.js    # 把导出结果拆分为 tactics/ 下的单文件
-    └── build-index.js      # 校验全部脚本并重建 viewer/tactics.json
+    ├── build-index.js      # 校验全部脚本并重建 viewer/tactics.json
+    └── render-gif.js       # 无头渲染任一脚本为 GIF（无需浏览器/ffmpeg）
 ```
 
 ## 战术文件格式
@@ -108,6 +125,18 @@ node tools/build-index.js
 ```
 
 导入后建议逐个检查介绍文案是否需要润色，删除 `source` 字段前确认不介意暴露原始 dbId。
+
+## 生成预览 GIF
+
+任意战术脚本可以一键渲染成 GIF（直接驱动播放器逐帧绘制，不需要浏览器和 ffmpeg）：
+
+```bash
+npm install   # 仅工具链需要：@napi-rs/canvas + gifenc
+node tools/render-gif.js tactics/serving/serve-and-volley.json docs/images/demo.gif
+# 可选参数：--width=360 --fps=10
+```
+
+README 顶部两张演示图就是用这个命令生成的。
 
 ## 贡献
 

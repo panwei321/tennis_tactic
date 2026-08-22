@@ -6,7 +6,7 @@
 
 1. Fork 本仓库并创建你的分支；
 2. 按下面的规范添加/修改 `tactics/` 下的脚本；
-3. 运行 `node tools/build-index.js`，确保**校验通过**且索引已重建；
+3. 运行 `node tools/build-index.js`，确保**校验通过**且索引已重建（CI 会在 push / PR 时自动跑同一套校验）；
 4. 本地预览确认动画效果：`python3 -m http.server 8080` → 打开 `http://localhost:8080/viewer/`；
 5. 提交 Pull Request，说明战术思路和适用场景。
 
