@@ -19,7 +19,7 @@ Designed for tennis enthusiasts, coaches, and app developers to use directly or 
 
 Once pushed to GitHub, the Pages workflow (`.github/workflows/deploy-pages.yml`) deploys the web player automatically — no clone needed:
 
-`https://<your-github-username>.github.io/tennis-tactic/viewer/`
+**[https://panwei321.github.io/tennis_tactic/viewer/](https://panwei321.github.io/tennis_tactic/viewer/)**
 
 > First-time setup: in **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions** (one-time).
 

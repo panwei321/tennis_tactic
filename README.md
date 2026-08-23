@@ -19,7 +19,7 @@
 
 推送到 GitHub 后，Pages 工作流（`.github/workflows/deploy-pages.yml`）会自动部署网页播放器，无需 clone 即可在线浏览：
 
-`https://<你的GitHub用户名>.github.io/tennis-tactic/viewer/`
+**[https://panwei321.github.io/tennis_tactic/viewer/](https://panwei321.github.io/tennis_tactic/viewer/)**
 
 > 首次使用需在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**（一次性设置）。
 
