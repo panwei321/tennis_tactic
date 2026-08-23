@@ -372,7 +372,11 @@
             "anim": "run",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "attacker_baseline"
+            "target": "attacker_baseline",
+            "from": [
+              180,
+              1260
+            ]
           },
           {
             "dur": 200,
@@ -438,7 +442,11 @@
             "anim": "idle",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "attacker_net"
+            "target": "attacker_net",
+            "from": [
+              500,
+              1000
+            ]
           },
           {
             "to": [

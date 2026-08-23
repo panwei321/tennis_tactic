@@ -1,5 +1,7 @@
 # tennis_tactic - 网球战术动画脚本库
 
+[English](README.en.md) | 中文
+
 一套用 **ASDL（Animation Script Description Language）** 描述的网球战术演示动画脚本集合：每个战术是一个自包含的 JSON 文件，包含动画脚本（球场/球员/球/时间轴）和配套的战术介绍（简介、目的、适用场景、注意事项）。
 
 适合网球爱好者、教练、网球类 App 开发者直接取用或二次开发——你可以用自己的播放器渲染这些脚本，也可以在现有脚本基础上改编出新战术。
@@ -41,22 +43,22 @@ http://localhost:8080/viewer/
 ```
 tennis_tactic/
 ├── tactics/                # 战术脚本（每个文件 = 一个战术）
-│   ├── baseline/           #   底线战术
-│   │   └── inside-out-forehand.json
-│   └── serving/            #   发球战术
-│       └── serve-and-volley.json
+│   ├── singles/            #   单打战术（8 条）
+│   ├── doubles/            #   双打战术（3 条，4 球员元素）
+│   └── baseline/           #   底线战术（示例）
 ├── docs/
 │   ├── asdl-spec.md        # ASDL 协议规范（二次开发必读）
+│   ├── asdl-schema.json    # JSON Schema（编辑器自动补全 / 机器校验）
 │   └── images/             # 文档图片（README 演示 GIF 等）
 ├── viewer/                 # 网页播放器（零依赖，可直接嵌入你的页面）
-│   ├── index.html          #   战术库预览页
+│   ├── index.html          #   战术库预览页（支持 ?id= 直达、搜索、倍速）
 │   ├── tactic-preview.js   #   ASDL 播放引擎（Canvas 2D 参考实现）
 │   ├── viewer.js / viewer.css
 │   └── tactics.json        #   索引文件（tools/build-index.js 生成，勿手改）
 └── tools/
     ├── export_tactics.sql  # 从 MySQL 业务库导出战术（维护者用）
     ├── import_export.js    # 把导出结果拆分为 tactics/ 下的单文件
-    ├── build-index.js      # 校验全部脚本并重建 viewer/tactics.json
+    ├── build-index.js      # 校验全部脚本（含 JSON Schema）并重建索引
     └── render-gif.js       # 无头渲染任一脚本为 GIF（无需浏览器/ffmpeg）
 ```
 
@@ -83,7 +85,7 @@ tennis_tactic/
 }
 ```
 
-动画坐标系、动作类型（`text` / `move` / `trajectory`）、缓动函数等细节见 **[docs/asdl-spec.md](docs/asdl-spec.md)**。
+动画坐标系、动作类型（`text` / `move` / `trajectory`）、缓动函数等细节见 **[docs/asdl-spec.md](docs/asdl-spec.md)**；机器可校验的格式定义见 **[docs/asdl-schema.json](docs/asdl-schema.json)**（VS Code 中可通过 `json.schemas` 把 `tactics/**/*.json` 关联到它，获得字段自动补全与实时校验）。
 
 ## 二次开发指南
 

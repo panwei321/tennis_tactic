@@ -383,7 +383,11 @@
             "anim": "run",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "server"
+            "target": "server",
+            "from": [
+              380,
+              1250
+            ]
           },
           {
             "to": [
@@ -394,7 +398,11 @@
             "anim": "run",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "receiver_right"
+            "target": "receiver_right",
+            "from": [
+              570,
+              30
+            ]
           }
         ]
       },
@@ -411,7 +419,11 @@
             "anim": "idle",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "receiver_left"
+            "target": "receiver_left",
+            "from": [
+              120,
+              95
+            ]
           },
           {
             "to": [
@@ -422,7 +434,11 @@
             "anim": "idle",
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "receiver_right"
+            "target": "receiver_right",
+            "from": [
+              500,
+              100
+            ]
           }
         ]
       }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网球战术动画库 - ASDL Viewer</title>
-  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="viewer.css?v=2">
 </head>
 <body>
   <header class="topbar">
@@ -40,7 +40,10 @@
         </div>
 
         <div class="info-panel">
-          <h2 id="tacticName"></h2>
+          <div class="tactic-header">
+            <h2 id="tacticName"></h2>
+            <button id="btnShare" class="btn share-btn" title="复制本战术的分享链接">复制链接</button>
+          </div>
           <p id="tacticCategory" class="category-tag"></p>
 
           <div class="info-block" id="blockIntroduction">
@@ -64,7 +67,7 @@
     </section>
   </main>
 
-  <script src="tactic-preview.js"></script>
-  <script src="viewer.js"></script>
+  <script src="tactic-preview.js?v=2"></script>
+  <script src="viewer.js?v=2"></script>
 </body>
 </html>

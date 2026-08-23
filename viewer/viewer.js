@@ -20,6 +20,7 @@
     btnPlay: document.getElementById('btnPlay'),
     btnReplay: document.getElementById('btnReplay'),
     btnSpeed: document.getElementById('btnSpeed'),
+    btnShare: document.getElementById('btnShare'),
     timeLabel: document.getElementById('timeLabel'),
     progressBar: document.getElementById('progressBar'),
     tacticName: document.getElementById('tacticName'),
@@ -63,12 +64,15 @@
     });
 
     renderList('');
-    selectTactic(state.filtered[0]);
+    // 支持 ?id=<tactic-id> 直达某条战术（分享链接）；无参数时选第一条
+    const wanted = new URLSearchParams(location.search).get('id');
+    selectTactic(state.tactics.find(t => t.id === wanted) || state.filtered[0]);
 
     els.search.addEventListener('input', () => renderList(els.search.value.trim()));
     els.btnPlay.addEventListener('click', () => state.player && state.player.togglePlay());
     els.btnReplay.addEventListener('click', () => state.player && state.player.replay());
     els.btnSpeed.addEventListener('click', () => state.player && state.player.toggleSpeed());
+    els.btnShare.addEventListener('click', copyShareLink);
 
     els.progressBar.addEventListener('input', () => {
       state.seeking = true;
@@ -105,6 +109,7 @@
         const btn = document.createElement('button');
         btn.className = 'list-item';
         btn.textContent = t.name || t.id;
+        btn.dataset.id = t.id;
         if (state.current && state.current.id === t.id) btn.classList.add('active');
         btn.addEventListener('click', () => selectTactic(t));
         els.list.appendChild(btn);
@@ -119,6 +124,11 @@
     els.playerPanel.hidden = false;
     els.loadError.hidden = true;
 
+    // 地址栏同步为 ?id=<id>，复制链接即可分享当前战术
+    try {
+      if (tactic.id) history.replaceState(null, '', location.pathname + '?id=' + encodeURIComponent(tactic.id));
+    } catch (e) { /* file:// 等环境下忽略 */ }
+
     els.tacticName.textContent = tactic.name || tactic.id;
     els.tacticCategory.textContent = tactic.category || '';
 
@@ -130,10 +140,25 @@
     const ok = state.player.loadScript(tactic.script);
     if (ok) state.player.play();
 
-    // 刷新列表高亮
+    // 刷新列表高亮（按 id 匹配，避免同名战术一起高亮）
     els.list.querySelectorAll('.list-item').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent === (tactic.name || tactic.id));
+      btn.classList.toggle('active', btn.dataset.id === tactic.id);
     });
+  }
+
+  // ============ 分享链接 ============
+  function copyShareLink() {
+    if (!state.current || !state.current.id) return;
+    const url = location.origin + location.pathname + '?id=' + encodeURIComponent(state.current.id);
+    const done = () => {
+      els.btnShare.textContent = '已复制 ✓';
+      setTimeout(() => { els.btnShare.textContent = '复制链接'; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, () => window.prompt('复制以下链接分享：', url));
+    } else {
+      window.prompt('复制以下链接分享：', url);
+    }
   }
 
   function fillInfo(blockId, value) {

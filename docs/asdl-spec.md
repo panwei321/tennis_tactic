@@ -90,7 +90,12 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
 
 ## 4. elements
 
-标准脚本包含 3 个固定元素（id 可自定义，但约定使用 `attacker` / `defender` / `ball`）：
+支持**任意数量**的元素，播放器按 `type` 逐个绘制。惯例命名：
+
+- **单打**：3 个元素 —— `attacker`（我方）/ `defender`（对手）/ `ball`；
+- **双打**：5 个元素 —— `attacker1` / `attacker2`（我方两人）、`defender1` / `defender2`（对手两人）、`ball`。
+
+单找示例：
 
 ```json
 [
@@ -99,6 +104,8 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
   { "id": "ball",     "type": "ball",   "label": "",     "color": "#CCFF00", "radius": 6,  "initPos": [360, 1230] }
 ]
 ```
+
+双打真实示例见 [`tactics/doubles/tactic-australian-formation-poach-serve.json`](../tactics/doubles/tactic-australian-formation-poach-serve.json)（4 球员 + 球）。
 
 | 字段 | 类型 | 说明 |
 |---|---|---|
@@ -163,7 +170,7 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `target` | string | ✓ | 目标元素 id |
-| `from` / `to` | `[x, y]` | ✓ | 起点 / 终点 |
+| `from` / `to` | `[x, y]` | ✓ | 起点 / 终点。`from` 应等于目标元素当前所在位置（缺失该动作会被参考播放器忽略） |
 | `dur` | number | ✓ | 移动时长（毫秒） |
 | `easing` | string | | 缓动函数名，默认 `linear` |
 
@@ -189,6 +196,14 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
 | `dur` | number | ✓ | 飞行时长（毫秒） |
 | `easing` | string | | 默认 `linear`（球速均匀更符合直觉） |
 | `showBounceMark` | boolean | | 是否在落点绘制落点标记，制胜分的最后一击设为 `true` |
+
+### 6.4 anim — 装饰性特效（预留）
+
+```json
+{ "type": "anim", "name": "hit", "target": "server" }
+```
+
+语义标注类动作（如 `hit` 表示挥拍击球瞬间）。**参考播放器目前忽略不渲染**，供未来实现挥拍/音效等特效的播放器使用；额外字段（如 `move` 上的 `anim: "run"` 跑动样式提示）同样作为扩展信息保留。
 
 ## 7. 支持的缓动函数
 
@@ -218,9 +233,10 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
 
 ## 10. 完整示例
 
-见 [`tactics/`](../tactics/) 目录：
+见 [`tactics/`](../tactics/) 目录（单打 / 双打 / 底线三个分类，共 12 条）：
 
-- [`tactics/baseline/inside-out-forehand.json`](../tactics/baseline/inside-out-forehand.json) — 底线战术：正手 Inside-Out
-- [`tactics/serving/serve-and-volley.json`](../tactics/serving/serve-and-volley.json) — 发球战术：发球上网
+- [`tactics/singles/tactic-serve-wide-approach-volley-v9.json`](../tactics/singles/tactic-serve-wide-approach-volley-v9.json) — 单打：发球上网
+- [`tactics/doubles/tactic-australian-formation-poach-serve.json`](../tactics/doubles/tactic-australian-formation-poach-serve.json) — 双打：澳式抢截（4 球员 + 球）
+- [`tactics/baseline/inside-out-forehand.json`](../tactics/baseline/inside-out-forehand.json) — 底线：正手 Inside-Out
 
-用仓库自带的网页播放器即可预览：`python3 -m http.server` 后打开 `viewer/index.html`。
+机器可校验的格式定义见 [`docs/asdl-schema.json`](asdl-schema.json)（JSON Schema，可用于编辑器自动补全）。用仓库自带的网页播放器即可预览：`python3 -m http.server` 后打开 `viewer/index.html`，支持 `?id=<tactic-id>` 直达指定战术。

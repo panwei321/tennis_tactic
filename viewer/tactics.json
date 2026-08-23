@@ -4076,7 +4076,11 @@
               "anim": "run",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "server"
+              "target": "server",
+              "from": [
+                380,
+                1250
+              ]
             },
             {
               "to": [
@@ -4087,7 +4091,11 @@
               "anim": "run",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "receiver_right"
+              "target": "receiver_right",
+              "from": [
+                570,
+                30
+              ]
             }
           ]
         },
@@ -4104,7 +4112,11 @@
               "anim": "idle",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "receiver_left"
+              "target": "receiver_left",
+              "from": [
+                120,
+                95
+              ]
             },
             {
               "to": [
@@ -4115,7 +4127,11 @@
               "anim": "idle",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "receiver_right"
+              "target": "receiver_right",
+              "from": [
+                500,
+                100
+              ]
             }
           ]
         }
@@ -4494,7 +4510,11 @@
               "anim": "run",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "attacker_baseline"
+              "target": "attacker_baseline",
+              "from": [
+                180,
+                1260
+              ]
             },
             {
               "dur": 200,
@@ -4560,7 +4580,11 @@
               "anim": "idle",
               "type": "move",
               "easing": "easeOutQuad",
-              "target": "attacker_net"
+              "target": "attacker_net",
+              "from": [
+                500,
+                1000
+              ]
             },
             {
               "to": [

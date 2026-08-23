@@ -12,8 +12,9 @@
 
 ## 战术脚本规范
 
-- **一个文件一个战术**，放在 `tactics/<分类目录>/` 下（singles / doubles / serving / returning / volley / baseline，新分类请先开 issue 讨论）；
+- **一个文件一个战术**，放在 `tactics/<分类目录>/` 下（现有分类：singles / doubles / baseline，新增分类请先开 issue 讨论）；
 - 文件名与 `id` 一致，使用 kebab-case 英文（如 `serve-and-volley.json`）；
+- 推荐 VS Code 用户在 `settings.json` 的 `json.schemas` 中把 `tactics/**/*.json` 关联到 `docs/asdl-schema.json`，编写时可获得字段补全与实时校验；
 - `script` 部分严格遵守 [ASDL 规范](docs/asdl-spec.md)，重点检查：
   - `meta.duration` 大于最后一个动作的结束时间 200–500ms；
   - `trajectory.waypoints` 至少 3 个点：起点、过网点（y ≈ 640）、落点；

@@ -2,9 +2,14 @@
   "name": "tennis-tactic",
   "version": "1.0.0",
   "private": true,
-  "description": "网球战术动画脚本库（ASDL）：战术脚本 + 协议文档 + 网页播放器。运行时零依赖，devDependencies 仅用于工具链（GIF 渲染）。",
+  "description": "网球战术动画脚本库（ASDL）：战术脚本 + 协议文档 + 网页播放器。运行时零依赖，devDependencies 仅用于工具链（GIF 渲染 / 校验）。",
+  "scripts": {
+    "validate": "node tools/build-index.js",
+    "render-gif": "node tools/render-gif.js"
+  },
   "devDependencies": {
     "@napi-rs/canvas": "^1.0.7",
+    "ajv": "^8.20.0",
     "gifenc": "^1.0.3"
   }
 }

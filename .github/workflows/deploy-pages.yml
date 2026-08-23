@@ -24,8 +24,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
 
-      # 部署前重建索引：同时充当格式校验，脚本不合法则部署失败
+      # 部署前重建索引：同时充当格式校验（含 JSON Schema），脚本不合法则部署失败
       - name: Build index (validate tactics)
         run: node tools/build-index.js
 

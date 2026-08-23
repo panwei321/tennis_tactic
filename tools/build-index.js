@@ -15,6 +15,20 @@ const ROOT = path.resolve(__dirname, '..');
 const TACTICS_DIR = path.join(ROOT, 'tactics');
 const INDEX_FILE = path.join(ROOT, 'viewer', 'tactics.json');
 
+// JSON Schema 校验（docs/asdl-schema.json）；未安装 ajv 时跳过并提示
+let schemaValidate = null;
+try {
+  const Ajv = require('ajv');
+  const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'asdl-schema.json'), 'utf8'));
+  schemaValidate = new Ajv({ allErrors: true }).compile(schema);
+} catch (e) {
+  if (e.code === 'MODULE_NOT_FOUND') {
+    console.warn('[提示] 未安装 ajv，跳过 JSON Schema 校验（npm install 后启用）');
+  } else {
+    throw e;
+  }
+}
+
 // 分类目录 → 展示顺序（未列出的目录排在最后）
 const DIR_ORDER = ['singles', 'doubles', 'serving', 'returning', 'volley', 'baseline'];
 
@@ -41,6 +55,13 @@ function validate(entry, file) {
   if (!entry.id) errors.push(`${where}: 缺少 id`);
   if (!entry.name) warnings.push(`${where}: 缺少 name`);
   if (!entry.category) warnings.push(`${where}: 缺少 category`);
+
+  // —— JSON Schema 校验（结构/类型/必填字段的最权威来源）——
+  if (schemaValidate && !schemaValidate(entry)) {
+    for (const err of schemaValidate.errors) {
+      errors.push(`${where}: schema ${err.instancePath || '/'} ${err.message}`);
+    }
+  }
 
   const s = entry.script;
   if (!s || typeof s !== 'object') {

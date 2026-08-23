@@ -158,7 +158,15 @@ body {
 .progress { flex: 1; accent-color: var(--accent-2); }
 
 /* ---------- 介绍区 ---------- */
-.info-panel h2 { margin: 4px 0 6px; font-size: 20px; }
+.tactic-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tactic-header h2 { margin: 4px 0 6px; font-size: 20px; }
+.share-btn { font-size: 12px; height: 28px; color: var(--text-dim); }
+.share-btn:hover { color: var(--accent); border-color: var(--accent); }
 .category-tag {
   display: inline-block;
   font-size: 12px;
