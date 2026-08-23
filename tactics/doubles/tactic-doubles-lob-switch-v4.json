@@ -1,0 +1,482 @@
+{
+  "id": "tactic-doubles-lob-switch-v4",
+  "name": "双打网前被挑高之换位",
+  "category": "双打战术",
+  "introduction": "双打中，当己方网前选手被对方底线球员挑高球过顶后，网前选手与底线选手立即交叉换位，由底线选手跨区去追接高球，网前选手则横向移动到另一侧并后撤至发球线后，形成新的攻防阵型。这是双打中最关键的应急反应战术之一。",
+  "purpose": "化解被挑高球后的防守混乱，避免两人都去追球导致空门大开。通过有组织的换位，保持“一人追球、一人补位”的防守结构，同时防止对方网前选手趁势压上封网。",
+  "scenarios": "对方底线选手挑出一记过顶高球，越过己方网前选手头顶；\\n己方网前选手站位靠前（贴网），后退不及；\\n对方一前一后站位，网前选手正准备向前压迫",
+  "tips": "“换”字必须喊出来；\\n网前选手果断横向快速移动换区，不要后退和底线人员抢接；\\n网球选手换位后站位要后撤到发球线做好防守，警惕对方网前选手压上，因为此时我方整体处于被动局势；",
+  "protocolVersion": "4.0",
+  "source": {
+    "dbId": 10
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-doubles-lob-switch-v4",
+      "fps": 60,
+      "name": "双打挑高球过顶换位战术（喊换优化）",
+      "author": "coach",
+      "version": "4.0",
+      "duration": 3200,
+      "description": "对方一区底线球员挑高球过顶我方二区网前人，球过顶后我方网前与底线人员立即换位。在启动换位时，网前人喊'换'，持续300ms。底线人从一区跑向二区救球，网前人从二区网前后撤至一区发球线后。对方网前人判断高球后前压准备拦截。"
+    },
+    "court": {
+      "bg": "court_hard",
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "id": "attacker_net",
+        "type": "player",
+        "color": "#00BFFF",
+        "label": "我方网前",
+        "sprite": "player_blue",
+        "initPos": [
+          200,
+          660
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "attacker_baseline",
+        "type": "player",
+        "label": "我方底线",
+        "sprite": "player_blue",
+        "initPos": [
+          520,
+          1240
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "defender_baseline",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对方底线",
+        "sprite": "player_red",
+        "initPos": [
+          150,
+          50
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "defender_net",
+        "type": "player",
+        "color": "#FF6F00",
+        "label": "对方网前",
+        "sprite": "player_red",
+        "initPos": [
+          540,
+          320
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "radius": 8,
+        "sprite": "ball",
+        "initPos": [
+          150,
+          50
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              360,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "对方一区底线挑高球"
+          },
+          {
+            "name": "hit",
+            "type": "anim",
+            "target": "defender_baseline"
+          },
+          {
+            "dur": 1900,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "easeInQuad",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                150,
+                50
+              ],
+              [
+                200,
+                300
+              ],
+              [
+                180,
+                1240
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 400,
+            "pos": [
+              200,
+              660
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.8)",
+              "color": "#FFEB3B",
+              "fontSize": 28
+            },
+            "content": "换"
+          },
+          {
+            "to": [
+              500,
+              1000
+            ],
+            "dur": 1500,
+            "anim": "run",
+            "from": [
+              200,
+              660
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker_net"
+          },
+          {
+            "to": [
+              180,
+              1260
+            ],
+            "dur": 900,
+            "anim": "run",
+            "from": [
+              520,
+              1240
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker_baseline"
+          },
+          {
+            "to": [
+              520,
+              560
+            ],
+            "dur": 800,
+            "anim": "run",
+            "from": [
+              540,
+              320
+            ],
+            "type": "move",
+            "easing": "easeOutCubic",
+            "target": "defender_net"
+          }
+        ]
+      },
+      {
+        "t": 1900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 400,
+            "pos": [
+              360,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "底线到位，准备击球"
+          },
+          {
+            "to": [
+              160,
+              1250
+            ],
+            "dur": 100,
+            "anim": "run",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker_baseline"
+          },
+          {
+            "dur": 200,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "easeOutBounce",
+            "target": "ball",
+            "bounces": [
+              0
+            ],
+            "waypoints": [
+              [
+                180,
+                1240
+              ],
+              [
+                180,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2100,
+        "type": "parallel",
+        "actions": [
+          {
+            "name": "hit",
+            "type": "anim",
+            "target": "attacker_baseline"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                180,
+                1200
+              ],
+              [
+                300,
+                640
+              ],
+              [
+                350,
+                70
+              ]
+            ]
+          },
+          {
+            "to": [
+              500,
+              100
+            ],
+            "dur": 300,
+            "anim": "idle",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker_net"
+          },
+          {
+            "to": [
+              220,
+              60
+            ],
+            "dur": 800,
+            "anim": "run",
+            "from": [
+              150,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutCubic",
+            "target": "defender_baseline"
+          }
+        ]
+      },
+      {
+        "t": 2600,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 580,
+            "pos": [
+              360,
+              940
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "换位完成，攻守平衡"
+          }
+        ]
+      }
+    ]
+  }
+}

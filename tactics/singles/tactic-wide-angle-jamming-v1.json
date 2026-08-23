@@ -1,0 +1,479 @@
+{
+  "id": "tactic-wide-angle-jamming-v1",
+  "name": "大角度调动后打中路深球",
+  "category": "单打战术",
+  "introduction": "",
+  "purpose": "",
+  "scenarios": "",
+  "tips": "",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 6
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-wide-angle-jamming-v1",
+      "name": "大角度调动后打中路深球",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 12600,
+      "description": "稳健型选手的拿分策略：连续大角度调动使对手在边线间疲于奔命，然后突然打一记追身中路深球，挤压对手挥拍空间，让对手无法舒展击球。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1250
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          30
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 800,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 大角度调动一区"
+          },
+          {
+            "to": [
+              360,
+              1245
+            ],
+            "dur": 1200,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                265,
+                640
+              ],
+              [
+                170,
+                100
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 900,
+        "actions": [
+          {
+            "to": [
+              170,
+              30
+            ],
+            "dur": 1300,
+            "from": [
+              360,
+              30
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2400,
+        "actions": [
+          {
+            "dur": 1800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手横移回击"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                170,
+                100
+              ],
+              [
+                265,
+                640
+              ],
+              [
+                360,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2500,
+        "actions": [
+          {
+            "to": [
+              360,
+              30
+            ],
+            "dur": 1700,
+            "from": [
+              170,
+              30
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2700,
+        "actions": [
+          {
+            "to": [
+              360,
+              1210
+            ],
+            "dur": 1400,
+            "from": [
+              360,
+              1254
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 4300,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 调动二区"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1210
+              ],
+              [
+                450,
+                640
+              ],
+              [
+                540,
+                100
+              ]
+            ]
+          },
+          {
+            "to": [
+              540,
+              30
+            ],
+            "dur": 1400,
+            "from": [
+              360,
+              30
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 5900,
+        "actions": [
+          {
+            "dur": 1900,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手疲于奔命"
+          },
+          {
+            "dur": 1900,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                540,
+                100
+              ],
+              [
+                450,
+                640
+              ],
+              [
+                360,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 6000,
+        "actions": [
+          {
+            "to": [
+              440,
+              30
+            ],
+            "dur": 1500,
+            "from": [
+              540,
+              30
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 6300,
+        "actions": [
+          {
+            "to": [
+              360,
+              1230
+            ],
+            "dur": 1400,
+            "from": [
+              360,
+              1210
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 7500,
+        "actions": [
+          {
+            "to": [
+              380,
+              30
+            ],
+            "dur": 1400,
+            "from": [
+              440,
+              30
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 7900,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "③ 追身中路深球！"
+          },
+          {
+            "dur": 1100,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1220
+              ],
+              [
+                365,
+                640
+              ],
+              [
+                370,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 9100,
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 18
+            },
+            "content": "追身挤压！对手无法舒展击球"
+          },
+          {
+            "dur": 2100,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                370,
+                100
+              ],
+              [
+                370,
+                600
+              ],
+              [
+                360,
+                590
+              ],
+              [
+                350,
+                580
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 11300,
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！中路追身制胜"
+          }
+        ]
+      }
+    ]
+  }
+}

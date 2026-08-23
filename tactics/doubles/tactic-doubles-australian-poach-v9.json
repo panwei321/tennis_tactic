@@ -1,0 +1,431 @@
+{
+  "id": "tactic-doubles-australian-poach-v9",
+  "name": "双打澳式抢截2",
+  "category": "双打战术",
+  "introduction": "",
+  "purpose": "",
+  "scenarios": "",
+  "tips": "",
+  "protocolVersion": "9.0",
+  "source": {
+    "dbId": 8
+  },
+  "script": {
+    "meta": {
+      "id": "tactic_doubles_australian_poach_v9",
+      "fps": 60,
+      "name": "双打澳式站位抢截中路空档（球路修正版）",
+      "author": "coach",
+      "version": "9.0",
+      "duration": 3500,
+      "description": "发球方澳式站位。发球落地一区后弹出边线，接发者仓促回球至网前中路，抢网者横移截击至对方底线中路得分。接发者回球后立即向边线回位。"
+    },
+    "court": {
+      "bg": "court_hard",
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF"
+    },
+    "elements": [
+      {
+        "id": "server",
+        "type": "player",
+        "label": "发球者",
+        "sprite": "player_blue",
+        "initPos": [
+          380,
+          1250
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "poacher",
+        "type": "player",
+        "color": "#00BFFF",
+        "label": "抢网者",
+        "sprite": "player_blue",
+        "initPos": [
+          380,
+          700
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "receiver_left",
+        "type": "player",
+        "color": "#C62828",
+        "label": "接发者·左",
+        "sprite": "player_red",
+        "initPos": [
+          150,
+          10
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "receiver_right",
+        "type": "player",
+        "color": "#FF6F00",
+        "label": "接发者·右",
+        "sprite": "player_red",
+        "initPos": [
+          570,
+          30
+        ],
+        "frameSize": [
+          80,
+          80
+        ],
+        "animations": {
+          "hit": {
+            "fps": 20,
+            "loop": false,
+            "frames": [
+              8,
+              9,
+              10
+            ],
+            "restore": "idle"
+          },
+          "run": {
+            "fps": 12,
+            "loop": true,
+            "frames": [
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          "idle": {
+            "fps": 8,
+            "loop": true,
+            "frames": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        }
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "radius": 8,
+        "sprite": "ball",
+        "initPos": [
+          380,
+          1240
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "name": "hit",
+            "type": "anim",
+            "target": "server"
+          },
+          {
+            "dur": 900,
+            "spin": "topspin",
+            "type": "trajectory",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [
+              0
+            ],
+            "waypoints": [
+              [
+                380,
+                1240
+              ],
+              [
+                140,
+                300
+              ],
+              [
+                80,
+                60
+              ]
+            ]
+          },
+          {
+            "to": [
+              85,
+              75
+            ],
+            "dur": 800,
+            "anim": "run",
+            "from": [
+              150,
+              10
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_left"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "type": "parallel",
+        "actions": [
+          {
+            "name": "hit",
+            "type": "anim",
+            "target": "receiver_left"
+          },
+          {
+            "dur": 600,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                80,
+                60
+              ],
+              [
+                370,
+                660
+              ]
+            ]
+          },
+          {
+            "to": [
+              360,
+              660
+            ],
+            "dur": 400,
+            "anim": "run",
+            "from": [
+              380,
+              700
+            ],
+            "type": "move",
+            "easing": "easeOutCubic",
+            "target": "poacher"
+          },
+          {
+            "to": [
+              120,
+              95
+            ],
+            "dur": 600,
+            "anim": "run",
+            "from": [
+              85,
+              75
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_left"
+          }
+        ]
+      },
+      {
+        "t": 1700,
+        "type": "parallel",
+        "actions": [
+          {
+            "name": "hit",
+            "type": "anim",
+            "target": "poacher"
+          },
+          {
+            "dur": 700,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                370,
+                660
+              ],
+              [
+                365,
+                400
+              ],
+              [
+                360,
+                80
+              ]
+            ]
+          },
+          {
+            "to": [
+              560,
+              1180
+            ],
+            "dur": 300,
+            "anim": "run",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "to": [
+              500,
+              100
+            ],
+            "dur": 500,
+            "anim": "run",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_right"
+          }
+        ]
+      },
+      {
+        "t": 2600,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              150,
+              100
+            ],
+            "dur": 600,
+            "anim": "idle",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_left"
+          },
+          {
+            "to": [
+              570,
+              100
+            ],
+            "dur": 600,
+            "anim": "idle",
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_right"
+          }
+        ]
+      }
+    ]
+  }
+}

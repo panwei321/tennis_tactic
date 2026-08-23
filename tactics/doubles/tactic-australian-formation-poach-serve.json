@@ -1,0 +1,416 @@
+{
+  "id": "tactic-australian-formation-poach-serve",
+  "name": "双打澳式抢截1",
+  "category": "双打战术",
+  "introduction": "发球方两人站在同一侧，网前选手不按常规站在对角，而是站在发球者同侧的网前靠近中线位置。",
+  "purpose": "封死接发球方最舒服的回球线路（斜线），逼迫对手接发只能打直线高难度球，或者冒险打斜线穿越网前选手。",
+  "scenarios": "对手接发球极强，习惯性回斜线深球时；或你们发球局急需拿分时。",
+  "tips": "业余慎用！ 如果搭档截击能力弱，这招就是送分。且发球者必须发完球立刻大范围补位，否则左边空档一打一个准。",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 7
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-australian-formation-poach-serve",
+      "name": "双打澳式站位发球抢截",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 5900,
+      "description": "双打战术：我方发球时采用澳式站位，发球手在二区底线，网前球员在二区靠近中线贴近网带。强力发球发到对方二区内角，对方被迫跑向中线接球，本能直线回球，我方网前球员预判抢网截击，直线打向对方空档得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#2E7D32"
+    },
+    "elements": [
+      {
+        "id": "attacker1",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "发球手",
+        "radius": 18,
+        "initPos": [
+          325,
+          1230
+        ]
+      },
+      {
+        "id": "attacker2",
+        "type": "player",
+        "color": "#00BFFF",
+        "label": "网前球员",
+        "radius": 18,
+        "initPos": [
+          330,
+          680
+        ]
+      },
+      {
+        "id": "defender1",
+        "type": "player",
+        "color": "#C62828",
+        "label": "接发球员",
+        "radius": 18,
+        "initPos": [
+          560,
+          15
+        ]
+      },
+      {
+        "id": "defender2",
+        "type": "player",
+        "color": "#FF6F00",
+        "label": "网前球员",
+        "radius": 18,
+        "initPos": [
+          300,
+          300
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          330,
+          1225
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "actions": [
+          {
+            "dur": 400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFFFFF",
+              "fontSize": 24
+            },
+            "content": "澳式站位发球抢截"
+          }
+        ]
+      },
+      {
+        "t": 500,
+        "actions": [
+          {
+            "dur": 400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "我方发球 网前蹲守中线"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "actions": [
+          {
+            "dur": 500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "我方发球"
+          },
+          {
+            "to": [
+              325,
+              1225
+            ],
+            "dur": 100,
+            "from": [
+              325,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker1"
+          },
+          {
+            "to": [
+              365,
+              15
+            ],
+            "dur": 900,
+            "from": [
+              560,
+              15
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender1"
+          },
+          {
+            "dur": 950,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                330,
+                1225
+              ],
+              [
+                365,
+                300
+              ],
+              [
+                360,
+                15
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 1700,
+        "actions": [
+          {
+            "dur": 250,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "我方网前快速移动"
+          },
+          {
+            "to": [
+              390,
+              660
+            ],
+            "dur": 700,
+            "from": [
+              300,
+              680
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker2"
+          }
+        ]
+      },
+      {
+        "t": 2100,
+        "actions": [
+          {
+            "dur": 600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 对方被动直线接发回球"
+          },
+          {
+            "to": [
+              500,
+              15
+            ],
+            "dur": 700,
+            "from": [
+              366,
+              15
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender1"
+          },
+          {
+            "dur": 700,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                15
+              ],
+              [
+                400,
+                660
+              ]
+            ],
+            "showBounceMark": false
+          }
+        ]
+      },
+      {
+        "t": 3000,
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFFFFF",
+              "fontSize": 20
+            },
+            "content": "② 抢网截击！预判成功"
+          },
+          {
+            "dur": 500,
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                400,
+                660
+              ],
+              [
+                630,
+                390
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              380,
+              310
+            ],
+            "dur": 700,
+            "from": [
+              300,
+              300
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender2"
+          },
+          {
+            "to": [
+              330,
+              1000
+            ],
+            "dur": 1000,
+            "from": [
+              330,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker1"
+          },
+          {
+            "to": [
+              530,
+              680
+            ],
+            "dur": 800,
+            "from": [
+              390,
+              660
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker2"
+          },
+          {
+            "to": [
+              550,
+              140
+            ],
+            "dur": 700,
+            "from": [
+              500,
+              15
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender1"
+          }
+        ]
+      },
+      {
+        "t": 4000,
+        "actions": [
+          {
+            "dur": 600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(46,125,50,0.9)",
+              "color": "#FFFFFF",
+              "fontSize": 20
+            },
+            "content": "③ 截击得分！打向空档"
+          }
+        ]
+      },
+      {
+        "t": 4800,
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "战术成功！发球+抢网完美配合"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "id": "tactic-moonball-attrition-v3",
+  "name": "月亮球消耗",
+  "category": "单打战术",
+  "introduction": "用高弧度、落点深的球推到对手底线附近，降低节奏，迫使对手在肩部以上击球或不断后退，等待失误或浅球。",
+  "purpose": "打乱对手快节奏，消耗体能，压制平击型选手；对手处理高球不稳时容易回出浅球，给你进攻机会。",
+  "scenarios": "对手平击多、节奏快、手感不稳；你被动时争取回位；或对手网前强但底线便弱时。",
+  "tips": "月亮球不是“挑高球”，需要足够前冲和深度，避免落点过浅被对手高压；逆风时适当加力。",
+  "protocolVersion": "3.0",
+  "source": {
+    "dbId": 13
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-moonball-attrition-v3",
+      "name": "月亮球消耗战术（三拍调度版）",
+      "author": "tennis17lai",
+      "version": "3.0",
+      "duration": 12900,
+      "description": "我方连续三拍月亮球分别压向对方中路底线、正手位底线、反手位底线，迫使对手在肩部以上击球且左右移动，待回球出浅后上步抢攻空档得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 500,
+        "actions": [
+          {
+            "dur": 1800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 第一拍：中路底线深区月亮球"
+          },
+          {
+            "to": [
+              365,
+              1225
+            ],
+            "dur": 1400,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                380,
+                250
+              ],
+              [
+                360,
+                70
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 800,
+        "actions": [
+          {
+            "to": [
+              358,
+              55
+            ],
+            "dur": 1300,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2400,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手后退高点击球回球"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                70
+              ],
+              [
+                370,
+                400
+              ],
+              [
+                365,
+                1180
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2900,
+        "actions": [
+          {
+            "to": [
+              370,
+              1220
+            ],
+            "dur": 1300,
+            "from": [
+              365,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 4300,
+        "actions": [
+          {
+            "dur": 1800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 第二拍：对方正手位底线月亮球"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                370,
+                1220
+              ],
+              [
+                280,
+                230
+              ],
+              [
+                158,
+                70
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 4600,
+        "actions": [
+          {
+            "to": [
+              155,
+              65
+            ],
+            "dur": 1500,
+            "from": [
+              358,
+              55
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 6200,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手被调到正手位，高点击球回球"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                150,
+                70
+              ],
+              [
+                260,
+                400
+              ],
+              [
+                365,
+                1150
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 6700,
+        "actions": [
+          {
+            "to": [
+              365,
+              1215
+            ],
+            "dur": 1400,
+            "from": [
+              370,
+              1220
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 8200,
+        "actions": [
+          {
+            "dur": 1800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 第三拍：对方反手位底线月亮球"
+          },
+          {
+            "dur": 1800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                365,
+                1215
+              ],
+              [
+                470,
+                230
+              ],
+              [
+                530,
+                70
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 8500,
+        "actions": [
+          {
+            "to": [
+              555,
+              70
+            ],
+            "dur": 1800,
+            "from": [
+              155,
+              65
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 10200,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 回球出浅！上步抢攻空档"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                560,
+                70
+              ],
+              [
+                420,
+                640
+              ],
+              [
+                360,
+                950
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 10600,
+        "actions": [
+          {
+            "to": [
+              380,
+              1000
+            ],
+            "dur": 900,
+            "from": [
+              365,
+              1215
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 11600,
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！三拍月亮球消耗后突击"
+          },
+          {
+            "dur": 800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                380,
+                1000
+              ],
+              [
+                160,
+                110
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              480,
+              100
+            ],
+            "dur": 900,
+            "from": [
+              555,
+              70
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      }
+    ]
+  }
+}

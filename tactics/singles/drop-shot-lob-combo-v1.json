@@ -1,0 +1,280 @@
+{
+  "id": "drop-shot-lob-combo-v1",
+  "name": "前后调动（Drop Shot + Lob Combo）",
+  "category": "单打战术",
+  "introduction": "先放一个软绵绵的网前小球，诱使对手冲上网，紧接着下一拍挑一记高球打他身后。",
+  "purpose": "最大化消耗对手体能，破坏防守节奏。",
+  "scenarios": "对手移动慢、体重较大；或对手站位极靠后时。",
+  "tips": "双打放小球是大忌，如果放的质量不高（过网太高），等于送死。此招适合3.5以上",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 9
+  },
+  "script": {
+    "meta": {
+      "id": "drop-shot-lob-combo-v1",
+      "name": "前后调动（Drop Shot + Lob Combo）",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 3800,
+      "description": "先放一个软绵绵的网前小球，诱使对手冲上网，紧接着下一拍挑一记高球打他身后。步骤：①切削放小球（过网急坠）；②对手跑上来救球；③挑直线深高球。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1225
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 100,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              360,
+              200
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 20
+            },
+            "content": "①切削放小球（过网急坠）"
+          }
+        ]
+      },
+      {
+        "t": 200,
+        "actions": [
+          {
+            "dur": 1000,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                360,
+                640
+              ],
+              [
+                360,
+                580
+              ]
+            ],
+            "showBounceMark": false
+          },
+          {
+            "to": [
+              360,
+              1180
+            ],
+            "dur": 800,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "to": [
+              360,
+              570
+            ],
+            "dur": 1000,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              360,
+              200
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 20
+            },
+            "content": "②对手跑上来救球"
+          }
+        ]
+      },
+      {
+        "t": 1300,
+        "actions": [
+          {
+            "dur": 700,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                580
+              ],
+              [
+                360,
+                640
+              ],
+              [
+                360,
+                880
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              360,
+              900
+            ],
+            "dur": 600,
+            "from": [
+              360,
+              1180
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "actions": [
+          {
+            "dur": 800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                880
+              ],
+              [
+                360,
+                640
+              ],
+              [
+                360,
+                70
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              360,
+              750
+            ],
+            "dur": 700,
+            "from": [
+              360,
+              900
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "to": [
+              360,
+              190
+            ],
+            "dur": 1000,
+            "from": [
+              360,
+              550
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 3000,
+        "actions": [
+          {
+            "dur": 500,
+            "pos": [
+              360,
+              1100
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.6)",
+              "color": "#FFD700",
+              "fontSize": 22
+            },
+            "content": "得分！对手被前后调动，我方制胜分！"
+          }
+        ]
+      }
+    ]
+  }
+}

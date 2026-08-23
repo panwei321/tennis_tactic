@@ -1,0 +1,451 @@
+{
+  "id": "tactic-hit-back-training-v4",
+  "name": "打回头球",
+  "category": "单打战术",
+  "introduction": "当你把对手大范围调动到边线外（比如反手位外角）救球后，他本能地会拼命跑回中央。此时，你不把球打向空旷的另外一侧，而是精准地把球打回他刚刚跑出来的那个角落。",
+  "purpose": "制造“急刹车”效应。人在高速回位时，突然要他反向折返跑，业余选手90%会重心失控，要么回球下网，要么跑不到位被迫放高球。",
+  "scenarios": "对手跑动能力较强，你打空场他能追上时；对手习惯性回位速度极快时（用这招刹他的车）。",
+  "tips": "这拍“回头球”不需要发力，越轻越好（借力挡回去即可）。发力会导致球速过快，对手反而能借力转身。轻飘飘落在空场，他只能看着球落地。",
+  "protocolVersion": "1.3",
+  "source": {
+    "dbId": 3
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-hit-back-training-v4",
+      "name": "打回头球战术",
+      "author": "tennis17lai",
+      "version": "1.3",
+      "duration": 10700,
+      "description": "底线单打战术：进攻方稳定在底线中心附近组织进攻，连续四拍攻击对方单打边线内两角。第四拍利用防守方惯性思维打回头球得分。球速节奏自然递进，轨迹平滑无折线。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#2E7D32"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "进攻方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "防守方",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "actions": [
+          {
+            "dur": 500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.6)",
+              "color": "#FFFFFF",
+              "fontSize": 24
+            },
+            "content": "打回头球战术"
+          }
+        ]
+      },
+      {
+        "t": 500,
+        "actions": [
+          {
+            "dur": 1100,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 正手攻击一区外侧"
+          },
+          {
+            "to": [
+              360,
+              1220
+            ],
+            "dur": 1000,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1100,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                270,
+                640
+              ],
+              [
+                170,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 600,
+        "actions": [
+          {
+            "to": [
+              180,
+              60
+            ],
+            "dur": 900,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1800,
+        "actions": [
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                170,
+                100
+              ],
+              [
+                280,
+                640
+              ],
+              [
+                370,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3200,
+        "actions": [
+          {
+            "dur": 1100,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 反手攻击二区外侧"
+          },
+          {
+            "dur": 1100,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1220
+              ],
+              [
+                460,
+                640
+              ],
+              [
+                540,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 3300,
+        "actions": [
+          {
+            "to": [
+              530,
+              60
+            ],
+            "dur": 900,
+            "from": [
+              180,
+              60
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4500,
+        "actions": [
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                540,
+                100
+              ],
+              [
+                440,
+                640
+              ],
+              [
+                350,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 5900,
+        "actions": [
+          {
+            "dur": 1100,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 正手再次攻击一区外侧"
+          },
+          {
+            "dur": 1100,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1220
+              ],
+              [
+                270,
+                640
+              ],
+              [
+                170,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 6000,
+        "actions": [
+          {
+            "to": [
+              180,
+              60
+            ],
+            "dur": 900,
+            "from": [
+              530,
+              60
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 7200,
+        "actions": [
+          {
+            "dur": 1300,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "防守方回击（惯性预判中…）"
+          },
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                170,
+                100
+              ],
+              [
+                280,
+                640
+              ],
+              [
+                370,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 7500,
+        "actions": [
+          {
+            "to": [
+              340,
+              60
+            ],
+            "dur": 800,
+            "from": [
+              180,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 8600,
+        "actions": [
+          {
+            "dur": 1100,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 打回头球！再次攻击一区"
+          },
+          {
+            "to": [
+              330,
+              60
+            ],
+            "dur": 800,
+            "from": [
+              340,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 900,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1220
+              ],
+              [
+                270,
+                640
+              ],
+              [
+                170,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      }
+    ]
+  }
+}

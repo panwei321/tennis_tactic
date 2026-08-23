@@ -1,0 +1,431 @@
+{
+  "id": "tactic-press-back-hit-forehand-v1",
+  "name": "压反打正",
+  "category": "单打战术",
+  "introduction": "连续用3-4拍高质量的反手位深球（落点压住对方反手侧底线），迫使对手在反手位反复弯腰、引拍。在他形成“这球还会打反手”的惯性思维时，突然变线打向他的正手大空档。",
+  "purpose": "利用“思维惯性”。人在连续处理同一落点时，脚步会不自觉地向该侧倾斜。此时突然变线，他需要先扭转认知，再扭转身体，业余选手100%会慢半拍。",
+  "scenarios": "对手反手切削/推挡较多，缺乏主动变线能力时；对手正手极强，你想压制他正手使用率时。",
+  "tips": "变线的那一拍必须压低过网高度（约高出球网30-50厘米）。如果变线球过网太高，对手有充裕的时间跨步用正手凌空抽击，反而给了对手进攻机会。",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 4
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-press-back-hit-forehand-v1",
+      "name": "底线单打压反打正战术",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 8500,
+      "description": "经典攻击弱侧战术：持续深球压制对方反手位，迫使回球出浅或空档，最后一拍突然变线大斜线打向正手位空档得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 600,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 压反手深角"
+          },
+          {
+            "to": [
+              380,
+              1225
+            ],
+            "dur": 1100,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1200,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                470,
+                640
+              ],
+              [
+                540,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 700,
+        "actions": [
+          {
+            "to": [
+              530,
+              60
+            ],
+            "dur": 1000,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1900,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手回球到一区"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                540,
+                100
+              ],
+              [
+                370,
+                640
+              ],
+              [
+                200,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "actions": [
+          {
+            "to": [
+              210,
+              1210
+            ],
+            "dur": 1300,
+            "from": [
+              380,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "to": [
+              440,
+              60
+            ],
+            "dur": 1200,
+            "from": [
+              530,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 3500,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 继续压反手"
+          },
+          {
+            "dur": 1200,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                210,
+                1210
+              ],
+              [
+                375,
+                640
+              ],
+              [
+                540,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              530,
+              60
+            ],
+            "dur": 1100,
+            "from": [
+              440,
+              60
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 3600,
+        "actions": [
+          {
+            "to": [
+              360,
+              1220
+            ],
+            "dur": 1000,
+            "from": [
+              210,
+              1210
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 4800,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手回球出浅"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                540,
+                100
+              ],
+              [
+                460,
+                640
+              ],
+              [
+                400,
+                1000
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 5000,
+        "actions": [
+          {
+            "to": [
+              400,
+              1030
+            ],
+            "dur": 1200,
+            "from": [
+              360,
+              1220
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 6400,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "③ 变线打正手空档！"
+          },
+          {
+            "dur": 900,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                400,
+                1030
+              ],
+              [
+                280,
+                640
+              ],
+              [
+                170,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 6500,
+        "actions": [
+          {
+            "to": [
+              400,
+              60
+            ],
+            "dur": 800,
+            "from": [
+              530,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 7400,
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！正手空档制胜"
+          }
+        ]
+      }
+    ]
+  }
+}

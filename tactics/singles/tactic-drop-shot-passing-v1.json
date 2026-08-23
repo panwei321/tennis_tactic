@@ -1,0 +1,411 @@
+{
+  "id": "tactic-drop-shot-passing-v1",
+  "name": "小球+穿越",
+  "category": "单打战术",
+  "introduction": "这是一种典型的节奏变化战术，底线相持中，趁对手站位靠后或回球较浅时，突然放一记低浅小球，把对手调到网前。对手匆忙上网后，立即打穿越球或过顶球，攻击其身后空档得分。",
+  "purpose": "1、破坏对手底线节奏。\\n2、消耗对手体能，暴露前后移动短板。\\n3、创造网前身后空档，直接得分。\\n4、让对手不敢站得太靠后，影响底线稳定性。",
+  "scenarios": "1、对手站位靠后：当对手习惯站在底线后2-3米甚至更远的位置防守时，放小球效果最好。\\n2、对手移动慢或体能下降：对手前后移动速度慢、转身慢，或比赛后段体能下降时，小球+穿越的成功率会大幅上升。\\n3、对手网前技术差：对手上网后截击、高压能力弱，回球容易出浅或挑高球不到位，适合使用该战术。\\n4、自己手感好、有网前基础：放小球需要良好的手感和控制，穿越球需要精准的线路选择，适合技术全面的球员使用。\\n5、场地条件适合：草地球场或球速较慢的场地，小球弹跳低、前冲少，更容易得分；红土场小球效果稍差，但仍可用于变化节奏。",
+  "tips": "1、小球要低、短、带下旋，不能过高过长。\\n2、出手要隐蔽，不能提前暴露意图。\\n3、放完小球立即跟进上网封堵。\\n4、穿越球要低平快速，打向对手移动反方向。\\n5、提防对手挑高球，准备后退高压。\\n6、不要频繁使用，关键分或体能下降时再用。",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 5
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-drop-shot-passing-v1",
+      "name": "放小球结合穿越球战术",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 10000,
+      "description": "通过突然的网前小球调动底线型对手上网，趁其回球质量不高时打快速穿越球得分。破坏对方底线节奏，将对手调离舒适区。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 600,
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 底线对拉，寻找机会"
+          },
+          {
+            "to": [
+              370,
+              1225
+            ],
+            "dur": 1200,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                365,
+                640
+              ],
+              [
+                360,
+                100
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 700,
+        "actions": [
+          {
+            "to": [
+              355,
+              55
+            ],
+            "dur": 1100,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手回球，观察站位靠后"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                360,
+                100
+              ],
+              [
+                370,
+                640
+              ],
+              [
+                365,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2400,
+        "actions": [
+          {
+            "to": [
+              375,
+              1215
+            ],
+            "dur": 1100,
+            "from": [
+              370,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 3600,
+        "actions": [
+          {
+            "dur": 2400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "② 突然放小球！"
+          },
+          {
+            "dur": 2400,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                375,
+                1215
+              ],
+              [
+                270,
+                640
+              ],
+              [
+                175,
+                560
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 4100,
+        "actions": [
+          {
+            "dur": 2000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手全速冲刺救球！"
+          },
+          {
+            "to": [
+              180,
+              565
+            ],
+            "dur": 2000,
+            "from": [
+              355,
+              55
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 6200,
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "勉强接到，仓促回球出浅"
+          },
+          {
+            "dur": 1500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                180,
+                565
+              ],
+              [
+                300,
+                640
+              ],
+              [
+                420,
+                1000
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 6800,
+        "actions": [
+          {
+            "to": [
+              415,
+              1030
+            ],
+            "dur": 1000,
+            "from": [
+              375,
+              1215
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 7800,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "③ 穿越球制胜！"
+          },
+          {
+            "dur": 900,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                415,
+                1030
+              ],
+              [
+                490,
+                640
+              ],
+              [
+                540,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              420,
+              480
+            ],
+            "dur": 1000,
+            "from": [
+              180,
+              565
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 8900,
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！穿越球制胜"
+          }
+        ]
+      }
+    ]
+  }
+}
