@@ -3,6 +3,9 @@ name: Validate tactics
 # 任何分支 push / PR 都校验全部战术脚本（与 viewer 播放器同一套规则）
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
