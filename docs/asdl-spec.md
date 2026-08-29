@@ -184,6 +184,7 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
   "curve": "catmullrom",
   "dur": 800,
   "easing": "linear",
+  "clearance": 1.2,
   "showBounceMark": false
 }
 ```
@@ -195,6 +196,7 @@ ASDL（Animation Script Description Language）是一个用于描述网球战术
 | `curve` | string | | 插值曲线，`catmullrom`（Catmull-Rom 样条，曲线经过所有途经点） |
 | `dur` | number | ✓ | 飞行时长（毫秒） |
 | `easing` | string | | 默认 `linear`（球速均匀更符合直觉） |
+| `clearance` | number | | 球的**过网高度**（米），供 3D 渲染器决定弧线高度：弧线最高点 = 网高（0.914m）+ 过网高度。不填默认 `1.2`（普通相持球）。参考取值：相持球 `1.0–1.5`、穿越/平击 `0.5–0.8`、放小球 `0.3–0.5`、挑高球/月亮球 `3.0–3.5`。**负值表示下网**：最高点低于网带（如 `-0.3` 表示最高点比网带低 0.3 米，球落入网中）。2D 俯视播放器无高度概念，忽略该字段 |
 | `showBounceMark` | boolean | | 是否在落点绘制落点标记，制胜分的最后一击设为 `true` |
 
 ### 6.4 anim — 装饰性特效（预留）

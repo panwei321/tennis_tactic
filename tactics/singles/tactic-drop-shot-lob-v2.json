@@ -236,7 +236,8 @@
                 580
               ]
             ],
-            "showBounceMark": true
+            "showBounceMark": true,
+            "clearance": 0.5
           }
         ]
       },
@@ -309,7 +310,8 @@
                 420,
                 1000
               ]
-            ]
+            ],
+            "clearance": 0.5
           }
         ]
       },
@@ -369,7 +371,8 @@
                 80
               ]
             ],
-            "showBounceMark": true
+            "showBounceMark": true,
+            "clearance": 3.0
           },
           {
             "to": [

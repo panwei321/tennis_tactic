@@ -3,172 +3,383 @@
   "title": "ASDL 战术文件",
   "description": "tactics/ 目录下战术文件的格式：外层为元信息与战术介绍，script 字段为符合 ASDL v1.0 规范的动画脚本体（见 docs/asdl-spec.md）。配套编辑器自动补全：VS Code 可在 settings.json 的 json.schemas 中把 tactics/**/*.json 关联到本文件。",
   "type": "object",
-  "required": ["id", "name", "category", "script"],
+  "required": [
+    "id",
+    "name",
+    "category",
+    "script"
+  ],
   "properties": {
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
       "description": "全局唯一标识，kebab-case，与文件名一致"
     },
-    "name": { "type": "string", "description": "战术名称（展示用）" },
-    "category": { "type": "string", "description": "分类名称，如：单打战术 / 双打战术 / 底线战术" },
-    "introduction": { "type": "string", "description": "战术简介（一句话）" },
-    "purpose": { "type": "string", "description": "战术目的（期望达成的效果）" },
-    "scenarios": { "type": "string", "description": "适用场景" },
-    "tips": { "type": "string", "description": "注意事项（执行要点与常见错误）" },
-    "protocolVersion": { "type": "string", "description": "ASDL 协议版本，当前 1.0" },
+    "name": {
+      "type": "string",
+      "description": "战术名称（展示用）"
+    },
+    "category": {
+      "type": "string",
+      "description": "分类名称，如：单打战术 / 双打战术 / 底线战术"
+    },
+    "introduction": {
+      "type": "string",
+      "description": "战术简介（一句话）"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "战术目的（期望达成的效果）"
+    },
+    "scenarios": {
+      "type": "string",
+      "description": "适用场景"
+    },
+    "tips": {
+      "type": "string",
+      "description": "注意事项（执行要点与常见错误）"
+    },
+    "protocolVersion": {
+      "type": "string",
+      "description": "ASDL 协议版本，当前 1.0"
+    },
     "source": {
       "type": "object",
       "description": "可选的来源信息（如从业务库导出时的 dbId）",
-      "properties": { "dbId": { "type": "number" } }
+      "properties": {
+        "dbId": {
+          "type": "number"
+        }
+      }
     },
-    "script": { "$ref": "#/$defs/asdlScript" }
+    "script": {
+      "$ref": "#/$defs/asdlScript"
+    }
   },
   "$defs": {
     "point": {
       "type": "array",
       "minItems": 2,
       "maxItems": 2,
-      "items": { "type": "number" },
+      "items": {
+        "type": "number"
+      },
       "description": "ASDL 坐标 [x, y]：x 0-720 左→右，y 0-1280 对手底线→我方底线，网 y=640"
     },
     "asdlScript": {
       "type": "object",
-      "required": ["meta", "court", "elements", "timeline"],
+      "required": [
+        "meta",
+        "court",
+        "elements",
+        "timeline"
+      ],
       "properties": {
-        "meta": { "$ref": "#/$defs/meta" },
-        "court": { "$ref": "#/$defs/court" },
+        "meta": {
+          "$ref": "#/$defs/meta"
+        },
+        "court": {
+          "$ref": "#/$defs/court"
+        },
         "elements": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/element" },
+          "items": {
+            "$ref": "#/$defs/element"
+          },
           "description": "单打惯例 3 个（attacker/defender/ball），双打 4 球员 + 球（attacker1/attacker2/defender1/defender2/ball），支持任意数量"
         },
         "timeline": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/timelineNode" }
+          "items": {
+            "$ref": "#/$defs/timelineNode"
+          }
         }
       }
     },
     "meta": {
       "type": "object",
-      "required": ["duration"],
+      "required": [
+        "duration"
+      ],
       "properties": {
-        "id": { "type": "string", "description": "kebab-case，建议带版本后缀，如 inside-out-forehand-v1" },
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "duration": { "type": "number", "exclusiveMinimum": 0, "description": "动画总时长（毫秒），应大于最后一个动作结束时间 200-500ms" },
-        "version": { "type": "string" },
-        "author": { "type": "string" }
+        "id": {
+          "type": "string",
+          "description": "kebab-case，建议带版本后缀，如 inside-out-forehand-v1"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "动画总时长（毫秒），应大于最后一个动作结束时间 200-500ms"
+        },
+        "version": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
       }
     },
     "court": {
       "type": "object",
       "properties": {
-        "width": { "type": "number", "description": "画布逻辑宽，标准 720" },
-        "height": { "type": "number", "description": "画布逻辑高，标准 1280" },
-        "surfaceColor": { "type": "string", "description": "场地底色：硬地 #0084D4 / 草地 #1F5D3B / 红土 #C75B12" },
-        "lineColor": { "type": "string" },
+        "width": {
+          "type": "number",
+          "description": "画布逻辑宽，标准 720"
+        },
+        "height": {
+          "type": "number",
+          "description": "画布逻辑高，标准 1280"
+        },
+        "surfaceColor": {
+          "type": "string",
+          "description": "场地底色：硬地 #0084D4 / 草地 #1F5D3B / 红土 #C75B12"
+        },
+        "lineColor": {
+          "type": "string"
+        },
         "courtRect": {
           "type": "object",
-          "required": ["x", "y", "w", "h"],
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h"
+          ],
           "properties": {
-            "x": { "type": "number" }, "y": { "type": "number" },
-            "w": { "type": "number" }, "h": { "type": "number" }
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "w": {
+              "type": "number"
+            },
+            "h": {
+              "type": "number"
+            }
           }
         },
-        "netPosition": { "type": "number", "description": "球网 y 坐标，标准 640" }
+        "netPosition": {
+          "type": "number",
+          "description": "球网 y 坐标，标准 640"
+        }
       }
     },
     "element": {
       "type": "object",
-      "required": ["id", "type", "initPos"],
+      "required": [
+        "id",
+        "type",
+        "initPos"
+      ],
       "properties": {
-        "id": { "type": "string", "description": "元素唯一标识，timeline 动作通过它引用" },
-        "type": { "enum": ["player", "ball"] },
-        "label": { "type": "string", "description": "元素下方显示的文字" },
-        "color": { "type": "string" },
-        "radius": { "type": "number" },
-        "initPos": { "$ref": "#/$defs/point" }
+        "id": {
+          "type": "string",
+          "description": "元素唯一标识，timeline 动作通过它引用"
+        },
+        "type": {
+          "enum": [
+            "player",
+            "ball"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "元素下方显示的文字"
+        },
+        "color": {
+          "type": "string"
+        },
+        "radius": {
+          "type": "number"
+        },
+        "initPos": {
+          "$ref": "#/$defs/point"
+        }
       }
     },
     "timelineNode": {
       "type": "object",
-      "required": ["t", "actions"],
+      "required": [
+        "t",
+        "actions"
+      ],
       "properties": {
-        "t": { "type": "number", "minimum": 0, "description": "节点触发时间（毫秒）" },
+        "t": {
+          "type": "number",
+          "minimum": 0,
+          "description": "节点触发时间（毫秒）"
+        },
         "actions": {
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/action" }
+          "items": {
+            "$ref": "#/$defs/action"
+          }
         }
       }
     },
     "action": {
       "oneOf": [
-        { "$ref": "#/$defs/textAction" },
-        { "$ref": "#/$defs/moveAction" },
-        { "$ref": "#/$defs/trajectoryAction" },
-        { "$ref": "#/$defs/animAction" }
+        {
+          "$ref": "#/$defs/textAction"
+        },
+        {
+          "$ref": "#/$defs/moveAction"
+        },
+        {
+          "$ref": "#/$defs/trajectoryAction"
+        },
+        {
+          "$ref": "#/$defs/animAction"
+        }
       ]
     },
     "animAction": {
       "type": "object",
-      "required": ["type", "name", "target"],
+      "required": [
+        "type",
+        "name",
+        "target"
+      ],
       "description": "装饰性特效动作（预留）：如 name=hit 表示挥拍特效。参考播放器目前忽略不渲染，仅作语义标注",
       "properties": {
-        "type": { "const": "anim" },
-        "name": { "type": "string", "description": "特效名，如 hit（挥拍）" },
-        "target": { "type": "string" }
+        "type": {
+          "const": "anim"
+        },
+        "name": {
+          "type": "string",
+          "description": "特效名，如 hit（挥拍）"
+        },
+        "target": {
+          "type": "string"
+        }
       }
     },
     "textAction": {
       "type": "object",
-      "required": ["type", "content", "pos", "dur"],
+      "required": [
+        "type",
+        "content",
+        "pos",
+        "dur"
+      ],
       "properties": {
-        "type": { "const": "text" },
-        "content": { "type": "string" },
-        "pos": { "$ref": "#/$defs/point" },
-        "dur": { "type": "number", "exclusiveMinimum": 0 },
+        "type": {
+          "const": "text"
+        },
+        "content": {
+          "type": "string"
+        },
+        "pos": {
+          "$ref": "#/$defs/point"
+        },
+        "dur": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
         "style": {
           "type": "object",
           "properties": {
-            "fontSize": { "type": "number" },
-            "color": { "type": "string" },
-            "bg": { "type": "string" }
+            "fontSize": {
+              "type": "number"
+            },
+            "color": {
+              "type": "string"
+            },
+            "bg": {
+              "type": "string"
+            }
           }
         }
       }
     },
     "moveAction": {
       "type": "object",
-      "required": ["type", "target", "from", "to", "dur"],
+      "required": [
+        "type",
+        "target",
+        "from",
+        "to",
+        "dur"
+      ],
       "properties": {
-        "type": { "const": "move" },
-        "target": { "type": "string" },
-        "from": { "$ref": "#/$defs/point", "description": "起点，应等于目标元素当前所在位置" },
-        "to": { "$ref": "#/$defs/point" },
-        "dur": { "type": "number", "exclusiveMinimum": 0 },
-        "easing": { "type": "string", "description": "球员跑位推荐 easeInOutQuad" }
+        "type": {
+          "const": "move"
+        },
+        "target": {
+          "type": "string"
+        },
+        "from": {
+          "$ref": "#/$defs/point",
+          "description": "起点，应等于目标元素当前所在位置"
+        },
+        "to": {
+          "$ref": "#/$defs/point"
+        },
+        "dur": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "easing": {
+          "type": "string",
+          "description": "球员跑位推荐 easeInOutQuad"
+        }
       }
     },
     "trajectoryAction": {
       "type": "object",
-      "required": ["type", "target", "waypoints", "dur"],
+      "required": [
+        "type",
+        "target",
+        "waypoints",
+        "dur"
+      ],
       "properties": {
-        "type": { "const": "trajectory" },
-        "target": { "type": "string", "description": "通常为 ball" },
+        "type": {
+          "const": "trajectory"
+        },
+        "target": {
+          "type": "string",
+          "description": "通常为 ball"
+        },
         "waypoints": {
           "type": "array",
           "minItems": 2,
-          "items": { "$ref": "#/$defs/point" },
+          "items": {
+            "$ref": "#/$defs/point"
+          },
           "description": "轨迹途经点，规范建议 3 个：起点、过网点（y≈640）、落点"
         },
-        "curve": { "type": "string", "description": "catmullrom：曲线经过所有途经点" },
-        "dur": { "type": "number", "exclusiveMinimum": 0 },
-        "easing": { "type": "string", "description": "球飞行推荐 linear" },
-        "showBounceMark": { "type": "boolean", "description": "制胜分最后一击设为 true" }
+        "curve": {
+          "type": "string",
+          "description": "catmullrom：曲线经过所有途经点"
+        },
+        "clearance": {
+          "type": "number",
+          "description": "过网高度（米），3D 渲染器据此决定弧线高度；弧顶 = 网高 0.914m + clearance。负值表示下网（最高点低于网带）。不填默认 1.2"
+        },
+        "dur": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "easing": {
+          "type": "string",
+          "description": "球飞行推荐 linear"
+        },
+        "showBounceMark": {
+          "type": "boolean",
+          "description": "制胜分最后一击设为 true"
+        }
       }
     }
   }
