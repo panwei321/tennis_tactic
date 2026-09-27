@@ -118,8 +118,7 @@
                 70
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 3.5
+            "showBounceMark": true
           }
         ]
       },
@@ -178,8 +177,7 @@
                 365,
                 1180
               ]
-            ],
-            "clearance": 3.5
+            ]
           }
         ]
       },
@@ -239,8 +237,7 @@
                 70
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 3.5
+            "showBounceMark": true
           }
         ]
       },
@@ -299,8 +296,7 @@
                 365,
                 1150
               ]
-            ],
-            "clearance": 3.5
+            ]
           }
         ]
       },
@@ -360,8 +356,7 @@
                 70
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 3.5
+            "showBounceMark": true
           }
         ]
       },
@@ -420,8 +415,7 @@
                 360,
                 950
               ]
-            ],
-            "clearance": 3.5
+            ]
           }
         ]
       },
@@ -477,8 +471,7 @@
                 110
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 3.5
+            "showBounceMark": true
           },
           {
             "to": [

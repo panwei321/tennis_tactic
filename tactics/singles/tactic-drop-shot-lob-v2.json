@@ -222,6 +222,7 @@
             "curve": "catmullrom",
             "easing": "linear",
             "target": "ball",
+            "clearance": 0.5,
             "waypoints": [
               [
                 375,
@@ -236,8 +237,7 @@
                 580
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 0.5
+            "showBounceMark": true
           }
         ]
       },
@@ -310,8 +310,7 @@
                 420,
                 1000
               ]
-            ],
-            "clearance": 0.5
+            ]
           }
         ]
       },
@@ -357,22 +356,22 @@
             "curve": "catmullrom",
             "easing": "linear",
             "target": "ball",
+            "clearance": 4,
             "waypoints": [
               [
                 415,
                 1030
               ],
               [
-                360,
+                415,
                 400
               ],
               [
-                540,
+                415,
                 80
               ]
             ],
-            "showBounceMark": true,
-            "clearance": 3.0
+            "showBounceMark": true
           },
           {
             "to": [

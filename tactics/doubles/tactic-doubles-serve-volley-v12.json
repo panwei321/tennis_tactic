@@ -1,0 +1,725 @@
+{
+  "id": "tactic-doubles-serve-volley-v12",
+  "name": "发球+双上网",
+  "category": "双打战术",
+  "introduction": "发球方发球后，发球人和网前人同时或前后错开向网前推进，形成双上网阵型，封堵对手回球线路。",
+  "purpose": "占据网前优势，压缩对手穿越角度，用截击或高压快速结束这一分，给对手持续压迫感。",
+  "scenarios": "我方发球质量较高，对手接发球回球大概率偏软、偏高，易出浅时；\n我方两人网前截击都好；\n需要主动拿分、不想打多拍时。",
+  "tips": "双上网需要默契，避免两人同时抢同一球；\n保持左右间距，不要在移动中失位；\n分腿垫步不可省；\n对手挑高球时，一人后退高压，另一人继续守网前。",
+  "protocolVersion": "12.0",
+  "source": {
+    "dbId": 21
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-doubles-serve-volley-v12",
+      "name": "双打发球+双上网战术（人球完全同步版）",
+      "author": "tennis17lai",
+      "version": "12.0",
+      "duration": 6800,
+      "description": "发球方二区发外角至对方二区，接发方被拉出边线勉强回球。发球方发球后稍作调整再前移，在对方回球到达发球线时刚好到位完成一拦。随后双上网，网前截击打向对方网前人员后退后的位置，对方网前在球到达后立即回出半高球，发球方高压得分。所有人球衔接紧密，无卡顿无瞬移。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "server",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "发球方",
+        "radius": 18,
+        "initPos": [
+          200,
+          1230
+        ]
+      },
+      {
+        "id": "net_player",
+        "type": "player",
+        "color": "#2E7D32",
+        "label": "发球方网前",
+        "radius": 18,
+        "initPos": [
+          480,
+          750
+        ]
+      },
+      {
+        "id": "receiver",
+        "type": "player",
+        "color": "#C62828",
+        "label": "接发球方",
+        "radius": 18,
+        "initPos": [
+          540,
+          50
+        ]
+      },
+      {
+        "id": "receiver_net",
+        "type": "player",
+        "color": "#FF6F00",
+        "label": "接发方网前",
+        "radius": 18,
+        "initPos": [
+          200,
+          320
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          200,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 发球：二区外角，弹向边线外"
+          },
+          {
+            "to": [
+              195,
+              1225
+            ],
+            "dur": 100,
+            "from": [
+              200,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "dur": 900,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [
+              0
+            ],
+            "waypoints": [
+              [
+                200,
+                1230
+              ],
+              [
+                540,
+                300
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              280,
+              950
+            ],
+            "dur": 600,
+            "from": [
+              195,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "to": [
+              630,
+              55
+            ],
+            "dur": 500,
+            "from": [
+              540,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          },
+          {
+            "to": [
+              190,
+              280
+            ],
+            "dur": 600,
+            "from": [
+              200,
+              320
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_net"
+          }
+        ]
+      },
+      {
+        "t": 900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 400,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                540,
+                300
+              ],
+              [
+                640,
+                50
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1300,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "接发方被拉出场外，回球至我方二区中前场"
+          },
+          {
+            "to": [
+              635,
+              50
+            ],
+            "dur": 100,
+            "from": [
+              630,
+              55
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                640,
+                50
+              ],
+              [
+                300,
+                950
+              ]
+            ]
+          },
+          {
+            "to": [
+              300,
+              950
+            ],
+            "dur": 150,
+            "from": [
+              280,
+              950
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          }
+        ]
+      },
+      {
+        "t": 1800,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              540,
+              55
+            ],
+            "dur": 500,
+            "from": [
+              635,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          },
+          {
+            "to": [
+              460,
+              730
+            ],
+            "dur": 400,
+            "from": [
+              480,
+              750
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "net_player"
+          }
+        ]
+      },
+      {
+        "t": 1900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 发球方一拦：斜线回对方二区底线"
+          },
+          {
+            "to": [
+              305,
+              940
+            ],
+            "dur": 100,
+            "from": [
+              300,
+              950
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                300,
+                950
+              ],
+              [
+                540,
+                50
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 2400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              260,
+              730
+            ],
+            "dur": 400,
+            "from": [
+              305,
+              940
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "to": [
+              545,
+              50
+            ],
+            "dur": 100,
+            "from": [
+              540,
+              55
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          },
+          {
+            "to": [
+              185,
+              250
+            ],
+            "dur": 400,
+            "from": [
+              190,
+              280
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_net"
+          }
+        ]
+      },
+      {
+        "t": 2500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "③ 对方底线回击，我方网前抢截"
+          },
+          {
+            "to": [
+              540,
+              50
+            ],
+            "dur": 100,
+            "from": [
+              545,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                540,
+                50
+              ],
+              [
+                460,
+                740
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3100,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 网前截击打向对方网前人员位置，对方同步后退"
+          },
+          {
+            "to": [
+              465,
+              720
+            ],
+            "dur": 100,
+            "from": [
+              460,
+              730
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "net_player"
+          },
+          {
+            "dur": 300,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                460,
+                740
+              ],
+              [
+                190,
+                100
+              ]
+            ]
+          },
+          {
+            "to": [
+              190,
+              100
+            ],
+            "dur": 300,
+            "from": [
+              185,
+              250
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_net"
+          }
+        ]
+      },
+      {
+        "t": 3400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              500,
+              55
+            ],
+            "dur": 400,
+            "from": [
+              540,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver"
+          }
+        ]
+      },
+      {
+        "t": 3500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "⑤ 对方网前在底线附近立即回出半高球"
+          },
+          {
+            "to": [
+              195,
+              100
+            ],
+            "dur": 100,
+            "from": [
+              190,
+              100
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "receiver_net"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                190,
+                100
+              ],
+              [
+                260,
+                730
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 4200,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑥ 发球方高压！V字轨迹，落地弹起出界"
+          },
+          {
+            "to": [
+              260,
+              710
+            ],
+            "dur": 100,
+            "from": [
+              260,
+              730
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "dur": 400,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [
+              1
+            ],
+            "waypoints": [
+              [
+                260,
+                710
+              ],
+              [
+                200,
+                80
+              ],
+              [
+                150,
+                -50
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 5000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！发球+双上网战术奏效"
+          },
+          {
+            "to": [
+              255,
+              700
+            ],
+            "dur": 400,
+            "from": [
+              260,
+              710
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "to": [
+              460,
+              710
+            ],
+            "dur": 400,
+            "from": [
+              465,
+              720
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "net_player"
+          }
+        ]
+      }
+    ]
+  }
+}

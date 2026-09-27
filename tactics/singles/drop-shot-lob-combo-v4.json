@@ -1,23 +1,23 @@
 {
-  "id": "drop-shot-lob-combo-v1",
+  "id": "drop-shot-lob-combo-v4",
   "name": "前后调动（Drop Shot + Lob Combo）",
   "category": "单打战术",
   "introduction": "先放一个软绵绵的网前小球，诱使对手冲上网，紧接着下一拍挑一记高球打他身后。",
   "purpose": "最大化消耗对手体能，破坏防守节奏。",
   "scenarios": "对手移动慢、体重较大；或对手站位极靠后时。",
   "tips": "双打放小球是大忌，如果放的质量不高（过网太高），等于送死。此招适合3.5以上",
-  "protocolVersion": "1.0",
+  "protocolVersion": "4.0",
   "source": {
     "dbId": 9
   },
   "script": {
     "meta": {
-      "id": "drop-shot-lob-combo-v1",
+      "id": "drop-shot-lob-combo-v4",
       "name": "前后调动（Drop Shot + Lob Combo）",
       "author": "tennis17lai",
-      "version": "1.0",
-      "duration": 3800,
-      "description": "先放一个软绵绵的网前小球，诱使对手冲上网，紧接着下一拍挑一记高球打他身后。步骤：①切削放小球（过网急坠）；②对手跑上来救球；③挑直线深高球。"
+      "version": "4.0",
+      "duration": 4000,
+      "description": "先放一个软绵绵的网前小球，诱使对手从底线后方较远位置冲上网，紧接着下一拍挑一记高球打他身后。短球飞行慢，对手前冲合理，无瞬移。"
     },
     "court": {
       "width": 720,
@@ -52,7 +52,7 @@
         "radius": 18,
         "initPos": [
           360,
-          50
+          20
         ]
       },
       {
@@ -71,7 +71,7 @@
         "t": 100,
         "actions": [
           {
-            "dur": 1200,
+            "dur": 1400,
             "pos": [
               360,
               200
@@ -82,7 +82,7 @@
               "color": "#FFFFFF",
               "fontSize": 20
             },
-            "content": "①切削放小球（过网急坠）"
+            "content": "① 切削放小球（过网急坠）"
           }
         ]
       },
@@ -90,7 +90,7 @@
         "t": 200,
         "actions": [
           {
-            "dur": 1000,
+            "dur": 1400,
             "type": "trajectory",
             "curve": "catmullrom",
             "easing": "linear",
@@ -124,16 +124,21 @@
             "type": "move",
             "easing": "easeInOutQuad",
             "target": "attacker"
-          },
+          }
+        ]
+      },
+      {
+        "t": 700,
+        "actions": [
           {
             "to": [
               360,
               570
             ],
-            "dur": 1000,
+            "dur": 1100,
             "from": [
               360,
-              50
+              20
             ],
             "type": "move",
             "easing": "easeInOutQuad",
@@ -142,7 +147,7 @@
         ]
       },
       {
-        "t": 1000,
+        "t": 1300,
         "actions": [
           {
             "dur": 800,
@@ -154,14 +159,14 @@
             "style": {
               "bg": "rgba(198,40,40,0.8)",
               "color": "#FFFFFF",
-              "fontSize": 20
+              "fontSize": 18
             },
-            "content": "②对手跑上来救球"
+            "content": "② 对手过网后才启动，二跳前勉强救球"
           }
         ]
       },
       {
-        "t": 1300,
+        "t": 1800,
         "actions": [
           {
             "dur": 700,
@@ -172,7 +177,7 @@
             "waypoints": [
               [
                 360,
-                580
+                570
               ],
               [
                 360,
@@ -202,10 +207,10 @@
         ]
       },
       {
-        "t": 2000,
+        "t": 2500,
         "actions": [
           {
-            "dur": 800,
+            "dur": 900,
             "type": "trajectory",
             "curve": "catmullrom",
             "easing": "linear",
@@ -243,12 +248,12 @@
           {
             "to": [
               360,
-              190
+              250
             ],
             "dur": 1000,
             "from": [
               360,
-              550
+              570
             ],
             "type": "move",
             "easing": "easeInOutQuad",
@@ -257,7 +262,7 @@
         ]
       },
       {
-        "t": 3000,
+        "t": 3200,
         "actions": [
           {
             "dur": 500,

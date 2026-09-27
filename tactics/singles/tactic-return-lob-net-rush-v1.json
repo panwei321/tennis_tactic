@@ -1,0 +1,424 @@
+{
+  "id": "tactic-return-lob-net-rush-v1",
+  "name": "接发挑高球破发球上网",
+  "category": "单打战术",
+  "introduction": "对手发球后上网，你用接发这一拍把球挑过他头顶、落到他身后的深区；他被迫急停转身回追，你顺势前压占据主动——用一拍挑高球把他的进攻变成防守。",
+  "purpose": "1、打\"向前\"的死角：发球上网的人正在向前冲，身后就是他最难受的方向。急停、转身、后退这三步做下来，主动权已经换手；\n2、一拍完成攻守转换：挑高球质量够，对手只能在后场被动防守，你随即前压，从接发一方变成进攻的一方；\n3、心理层面：被挑过顶一次之后，他下次上网就会犹豫（怕身后），发球上网的威力随之打折。",
+  "scenarios": "1、对手是发球上网型，或这一分他发球上网了、正在向网前压；\n2、你接发站位能站得住（没被大外角拉出场外），有时间做完整个向上的挥拍；\n3、对手网前技术好但后退能力一般、或不擅长高压球时效果最好；\n4、硬地等弹跳规则的场地更划算；风大或对方高压很强时慎用；\n5、破发点、对方二发等可以施压的局面。",
+  "tips": "1、质量不够的高球 = 送对方一记舒适高压，比不打还糟；拿不准时宁可挑得更高更深；\n2、别\"捧球\"：没有上旋的高球落地弹跳规则，对方处理起来很舒服，也没有急坠；\n3、顶点必须过了人：顶点还在网带上方或正好在对方头顶，等于把球喂到他拍上；\n4、如果对方上网离网还很远，打对方脚下（低平球）往往比挑高球更稳，两者混着用；\n5、挑完必须动：站在原地看的挑高球只算半拍，前压才是这一分的后半段；\n6、别每球都挑：挑多了对手会站住位置等高压。",
+  "protocolVersion": "2.5",
+  "source": {
+    "dbId": 24
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-return-lob-net-rush-v1",
+      "name": "接发球挑高球破上网",
+      "author": "tennis17lai",
+      "version": "2.5",
+      "duration": 8300,
+      "description": "对手发球后上网，你用接发这一拍把球挑过她头顶、落到她身后的深区。核心三要点：高（过顶）＋深（逼她转身）＋上旋急坠。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#0084D4"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#42A5F5",
+        "label": "蓝方·接发",
+        "radius": 18,
+        "initPos": [
+          193,
+          1341
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#EF5350",
+        "label": "红方·上网",
+        "radius": 18,
+        "initPos": [
+          385,
+          -11
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "label": "",
+        "radius": 6,
+        "initPos": [
+          380,
+          14
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 站位与预判"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 红方发球内角后立刻上网"
+          },
+          {
+            "dur": 950,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                380,
+                14
+              ],
+              [
+                315,
+                943
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              360,
+              393
+            ],
+            "dur": 1700,
+            "from": [
+              385,
+              -11
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              277,
+              1312
+            ],
+            "dur": 1300,
+            "from": [
+              193,
+              1341
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 1950,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 850,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                315,
+                943
+              ],
+              [
+                291,
+                1290
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2700,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 被动起拍：降拍头向上刷出上旋"
+          },
+          {
+            "dur": 3000,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                3,
+                8
+              ]
+            },
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 3.5,
+            "waypoints": [
+              [
+                291,
+                1290
+              ],
+              [
+                500,
+                60
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3500,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              299,
+              903
+            ],
+            "dur": 2500,
+            "from": [
+              277,
+              1312
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 3800,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 高弧线过顶"
+          },
+          {
+            "dur": 1500,
+            "pos": [
+              140,
+              140
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 15
+            },
+            "content": "落点：红方反手深区"
+          }
+        ]
+      },
+      {
+        "t": 4000,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              400,
+              250
+            ],
+            "dur": 700,
+            "from": [
+              360,
+              393
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4700,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              480,
+              -10
+            ],
+            "dur": 1400,
+            "from": [
+              400,
+              250
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑤ 红方转身后撤回底线，接挑高球——攻守易位"
+          }
+        ]
+      },
+      {
+        "t": 5700,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑥ 蓝方顺势前压到发球线——角色互换"
+          }
+        ]
+      },
+      {
+        "t": 6100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              490,
+              50
+            ],
+            "dur": 900,
+            "from": [
+              480,
+              -10
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 7000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑦ 攻守易位"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,23 +1,23 @@
 {
-  "id": "tactic-serve-wide-approach-volley-v9",
-  "name": "发球上网",
+  "id": "tactic-serve-wide-approach-two-volleys-v4",
+  "name": "发球上网2",
   "category": "单打战术",
-  "introduction": "发球把对手拉出场外，如占先区发外角，对手回球质量下降，你立即前移，在网前截击或高压结束。",
-  "purpose": " 利用发球创造半场机会，缩短回合，给对手回球时间压力，尤其对穿越能力弱的业余选手有效。",
-  "scenarios": "发球落点极刁（外角拉出场外或追身挤压），对手只能“磕”出一拍。\n对手回球高于网带、速度慢、落点浅，你截击时球在舒适高度。\n你前移快，到网前时离网很近（2米以内），截击角度大。",
-  "tips": "敢发力：球高且浅时，可以加力截击或下压，追求一拍致死。\n打角度优先：不需要100%发力，重点是打到对手跑不到的那一侧。\n截击高度：球在腰部到肩部之间最理想；球若在肩以上，直接高压。",
-  "protocolVersion": "9.0",
+  "introduction": "发球后前移，第一拍截击不追求直接打死，而是把球打到深区或对手脚下，让对手被迫在更被动的位置回球，然后你贴网用第二拍截击终结。\n",
+  "purpose": " 利用发球创造半场机会，缩短回合，给对手回球施加压力",
+  "scenarios": "发球角度尚可，但对手回球低平，你被迫在发球线附近截击。\n\n对手接发球质量不差，能把球压到你的半场或低处。\n你不想冒险一拍打死（容易失误），选择稳妥的两步终结。\n\n",
+  "tips": "发球质量不错但对手回球低、平、深，你到网前时球在膝盖以下或半场位置，无法一拍拍死，此时第一截击的任务是“做深”，把对手继续压在底线或半场，自己继续贴网，创造第二拍的轻松终结机会。\n",
+  "protocolVersion": "4.0",
   "source": {
-    "dbId": 14
+    "dbId": 15
   },
   "script": {
     "meta": {
-      "id": "tactic-serve-wide-approach-volley-v9",
-      "name": "发球外角+随球上网战术（连贯时间轴版）",
+      "id": "tactic-serve-wide-approach-two-volleys-v4",
+      "name": "发球外角+随球上网·两次截击战术（接发方全程动态版）",
       "author": "tennis17lai",
-      "version": "9.0",
-      "duration": 4800,
-      "description": "发球方在二区靠近中线发外角球，球先落在对方二区发球区外角，弹向右侧边线外，将对手逼出边线。发球后停顿半秒，移动到发球线T点等待，对手出浅后前移截击，比球提前200毫秒到位，直线推截至左侧空档得分。"
+      "version": "4.0",
+      "duration": 6600,
+      "description": "发球方在二区靠近中线发外角球，球先落在对方二区发球区外角，弹向右侧边线外，将对手逼出边线。发球后移动到发球线T点等待，第一次截击推深至对方底线，随后立即上网，第二次截击直线空档得分。接发方每次击球后均立即回位，全程无呆站。"
     },
     "court": {
       "width": 720,
@@ -195,7 +195,7 @@
             "target": "receiver"
           },
           {
-            "dur": 800,
+            "dur": 1100,
             "spin": "none",
             "type": "trajectory",
             "curve": "linear",
@@ -208,34 +208,34 @@
                 40
               ],
               [
-                370,
-                720
+                360,
+                900
               ]
             ]
           }
         ]
       },
       {
-        "t": 1500,
+        "t": 1600,
         "actions": [
           {
             "to": [
-              370,
-              720
+              400,
+              55
             ],
-            "dur": 400,
+            "dur": 800,
             "from": [
-              360,
-              900
+              635,
+              50
             ],
             "type": "move",
             "easing": "easeOutQuad",
-            "target": "server"
+            "target": "receiver"
           }
         ]
       },
       {
-        "t": 2100,
+        "t": 2400,
         "actions": [
           {
             "dur": 1200,
@@ -249,7 +249,145 @@
               "color": "#FFEB3B",
               "fontSize": 20
             },
-            "content": "③ 提前到位，网前直线推截至左侧空档"
+            "content": "③ 第一次截击：推深至对方底线"
+          },
+          {
+            "to": [
+              365,
+              890
+            ],
+            "dur": 100,
+            "from": [
+              360,
+              900
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                360,
+                900
+              ],
+              [
+                540,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              370,
+              720
+            ],
+            "dur": 400,
+            "from": [
+              365,
+              890
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "server"
+          }
+        ]
+      },
+      {
+        "t": 2600,
+        "actions": [
+          {
+            "to": [
+              545,
+              60
+            ],
+            "dur": 700,
+            "from": [
+              400,
+              55
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "receiver"
+          }
+        ]
+      },
+      {
+        "t": 3300,
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手勉强回球，球飞向网前"
+          },
+          {
+            "dur": 700,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                540,
+                60
+              ],
+              [
+                370,
+                720
+              ]
+            ]
+          },
+          {
+            "to": [
+              400,
+              120
+            ],
+            "dur": 800,
+            "from": [
+              545,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "receiver"
+          }
+        ]
+      },
+      {
+        "t": 4000,
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 第二次截击：直线空档得分！"
           },
           {
             "to": [
@@ -279,30 +417,16 @@
                 720
               ],
               [
-                160,
-                110
+                150,
+                100
               ]
             ],
             "showBounceMark": true
-          },
-          {
-            "to": [
-              400,
-              120
-            ],
-            "dur": 800,
-            "from": [
-              635,
-              50
-            ],
-            "type": "move",
-            "easing": "easeInQuad",
-            "target": "receiver"
           }
         ]
       },
       {
-        "t": 3000,
+        "t": 4800,
         "actions": [
           {
             "dur": 1500,
@@ -316,7 +440,7 @@
               "color": "#FFEB3B",
               "fontSize": 22
             },
-            "content": "得分！发球外角+随球上网"
+            "content": "得分！发球外角+随球上网+两次截击"
           },
           {
             "to": [

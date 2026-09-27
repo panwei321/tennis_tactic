@@ -29,6 +29,30 @@ const CATEGORY_DIRS = {
   '未分类': 'misc'
 };
 
+/**
+ * 业务库编辑器保存的脚本与仓库 ASDL v1.0 的两处差异，导入时归一化：
+ * 1. move 动作省略 from（业务库运行时取元素当前位置）；仓库 schema 与播放器要求显式 from
+ *    （tactic-preview.js 对缺 from 的 move 直接跳过不播）。按时间轴顺序模拟元素位置补齐。
+ * 2. meta.duration 常小于最后一个动作结束时间；按规范补为 maxEnd + 300ms。
+ */
+function normalizeScript(script) {
+  const pos = {};
+  (script.elements || []).forEach(e => { pos[e.id] = e.initPos ? e.initPos.slice() : null; });
+  let maxEnd = 0;
+  (script.timeline || []).forEach(node => {
+    (node.actions || []).forEach(a => {
+      maxEnd = Math.max(maxEnd, (node.t || 0) + (a.dur || 0));
+      if (a.type === 'move') {
+        if (!a.from && pos[a.target] && a.to) a.from = pos[a.target].slice();
+        if (a.to) pos[a.target] = a.to.slice();
+      } else if (a.type === 'trajectory' && a.waypoints && a.waypoints.length) {
+        pos[a.target] = a.waypoints[a.waypoints.length - 1].slice();
+      }
+    });
+  });
+  if (script.meta && script.meta.duration <= maxEnd) script.meta.duration = maxEnd + 300;
+}
+
 function main() {
   if (!fs.existsSync(EXPORT_FILE)) {
     console.error('未找到 tools/export.json，请先按 README 的「数据导出」步骤生成。');
@@ -52,6 +76,7 @@ function main() {
       skip++;
       return;
     }
+    normalizeScript(script);
 
     const category = row.category || '未分类';
     const dir = CATEGORY_DIRS[category] || 'misc';

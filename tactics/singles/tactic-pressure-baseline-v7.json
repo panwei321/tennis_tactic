@@ -1,0 +1,563 @@
+{
+  "id": "tactic-pressure-baseline-v7",
+  "name": "底线压制",
+  "category": "单打战术",
+  "introduction": "持续把球打向对手底线深区，不追求大角度，只追求深度，迫使对手站位不断后退，在底线后击球。优先打对手反拍薄弱位，用稳定相持消耗对手，等待其主动失误或回出浅球。",
+  "purpose": "压缩对手进攻空间。当对手被压在底线后1—2米时，他无法抢上升点进攻，只能被动捞球或防守性回球。同时优先攻击反拍薄弱位，让对手在最不舒服的位置反复击球，稳定性逐渐崩溃。",
+  "scenarios": "你底线稳定性强、有耐心、不喜欢冒险抢攻；\n对手站位习惯贴近底线、喜欢借力抢攻；\n对手反拍明显弱于正手；\n比赛节奏偏快、你需要主动降速控制局面时。",
+  "tips": "推深不等于猛抽，用70%力量、充分过网高度即可，深度比速度更重要。\n同时“稳定”是这一战术的生命线——不要因为一两拍对手回球稍浅就急于变线抢攻，耐心等到对手回球真正变短、变高时再下手。",
+  "protocolVersion": "7.0",
+  "source": {
+    "dbId": 17
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-pressure-baseline-v7",
+      "name": "压制底线战术",
+      "author": "tennis17lai",
+      "version": "7.0",
+      "duration": 7300,
+      "description": "第一拍打正手位深区调动，第二拍开始连续两拍压制反手位深区，迫使对手在底线后1-2米处被动击球，第三拍让对手更加后退，最终回球出浅，上步抢攻正手空档得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 第一拍：打正手位深区（不贴边）"
+          },
+          {
+            "to": [
+              350,
+              1225
+            ],
+            "dur": 300,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 800,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                200,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 200,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              205,
+              55
+            ],
+            "dur": 800,
+            "from": [
+              360,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手正手位回球后向中线回位"
+          },
+          {
+            "to": [
+              280,
+              50
+            ],
+            "dur": 600,
+            "from": [
+              205,
+              55
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                200,
+                60
+              ],
+              [
+                350,
+                1200
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 第二拍：压制反手深区，对手退至底线后"
+          },
+          {
+            "to": [
+              345,
+              1220
+            ],
+            "dur": 300,
+            "from": [
+              350,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 800,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                350,
+                1200
+              ],
+              [
+                520,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              520,
+              25
+            ],
+            "dur": 800,
+            "from": [
+              280,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2800,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手在底线后被动回球，继续后退"
+          },
+          {
+            "to": [
+              515,
+              20
+            ],
+            "dur": 100,
+            "from": [
+              520,
+              25
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                520,
+                25
+              ],
+              [
+                345,
+                1150
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3700,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 第三拍：继续压制反手深区，对手退得更靠后"
+          },
+          {
+            "to": [
+              345,
+              1145
+            ],
+            "dur": 200,
+            "from": [
+              345,
+              1150
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 800,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                345,
+                1150
+              ],
+              [
+                520,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              520,
+              5
+            ],
+            "dur": 700,
+            "from": [
+              515,
+              20
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4600,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "对手在底线后极远位置回球出浅！"
+          },
+          {
+            "to": [
+              515,
+              10
+            ],
+            "dur": 100,
+            "from": [
+              520,
+              5
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                520,
+                5
+              ],
+              [
+                345,
+                1000
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 4800,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              350,
+              1000
+            ],
+            "dur": 600,
+            "from": [
+              345,
+              1145
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 5400,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 上步抢攻正手位大空档"
+          },
+          {
+            "to": [
+              355,
+              990
+            ],
+            "dur": 100,
+            "from": [
+              350,
+              1000
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                350,
+                1000
+              ],
+              [
+                200,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              280,
+              80
+            ],
+            "dur": 700,
+            "from": [
+              515,
+              10
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 6000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！底线压制奏效"
+          },
+          {
+            "to": [
+              350,
+              950
+            ],
+            "dur": 400,
+            "from": [
+              355,
+              990
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      }
+    ]
+  }
+}

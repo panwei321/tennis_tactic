@@ -1,0 +1,789 @@
+{
+  "id": "tactic-return-attack-second-serve-v1",
+  "name": "接发球抢攻",
+  "category": "单打战术",
+  "introduction": "接二发或弱一发时，向前跨一两步进入底线内，抢在球的上升期用正手击球，把这一拍直接变成进攻——直线打对手反手深区（弱侧），或斜线打对手回位时让出的底线角（回头球）。核心是\"迎前一步 + 击球点提前\"，把时间从发球方手里拿走。",
+  "purpose": "1、把时间拿走：站在习惯位置回球，发球方有时间回位；抢在上升期击球，她还没站稳球就回来了；\n2、把接二发变成自己的进攻球：业余二发普遍慢、浅、旋转单一，抢攻得分率可过半——抢成几次，对方二发会明显心虚，甚至直接双误；\n3、用选线施压：直线压弱侧反手（逼她在移动中用反手处理深球）；斜线把她拉向大角（为下一拍空档做球）。",
+  "scenarios": "1、对方二发弱（无速度、无深度、无角度），或一发进球率低、一发质量差时；\n2、硬地等弹跳规则的场地（抢点划算；红土高弹跳更适合退后等球）；\n3、你正手手感热、脚步跟得上时；\n4、破发点、大幅领先等可施压的比分（再进一步可站到发球线附近逼双误）",
+  "tips": "1、脚步不能偷懒：越是对菜球越要小碎步调整到位再打；\n2、拉拍幅度随来球速度变化，不要用同一模式；抢攻 ≠ 发力猛抽，落点与深度比发力重要；\n3、选线要在对方击球前决定，临场犹豫两头落空；\n4、抢攻是窗口球、不是每分都抢；\n5、别把接一发也当抢攻机会。",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 23
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-return-attack-second-serve-v1",
+      "name": "接发球抢攻（接二发 / 弱一发）",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 17300,
+      "description": "接二发或弱一发时向前跨一两步进入底线内，抢在球的上升期用正手击球，把这一拍直接变成进攻"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#0084D4"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#42A5F5",
+        "label": "接发方",
+        "radius": 18,
+        "initPos": [
+          476,
+          1291
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#EF5350",
+        "label": "发球方",
+        "radius": 18,
+        "initPos": [
+          279,
+          -11
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "label": "",
+        "radius": 6,
+        "initPos": [
+          289,
+          19
+        ]
+      },
+      {
+        "id": "opt_line",
+        "type": "ball",
+        "color": "rgba(255,202,40,0.9)",
+        "label": "",
+        "radius": 6,
+        "initPos": [
+          431,
+          1800
+        ]
+      },
+      {
+        "id": "opt_cross",
+        "type": "ball",
+        "color": "rgba(255,202,40,0.9)",
+        "label": "",
+        "radius": 6,
+        "initPos": [
+          431,
+          1800
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1900,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 站位与预判：蓝方一区底线正手接发，站位略偏边线"
+          },
+          {
+            "dur": 1900,
+            "pos": [
+              70,
+              700
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.62)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "盯抛球，抛球一出就向前跨步"
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 红方二发：上旋、球速慢、常规落点"
+          },
+          {
+            "dur": 1400,
+            "pos": [
+              70,
+              700
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.62)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "缺速度、缺深度、缺角度——这是进场抢攻窗口"
+          },
+          {
+            "to": [
+              277,
+              -14
+            ],
+            "dur": 100,
+            "from": [
+              279,
+              -11
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.9,
+            "waypoints": [
+              [
+                289,
+                19
+              ],
+              [
+                405,
+                943
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2420,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              408,
+              1173
+            ],
+            "dur": 880,
+            "from": [
+              476,
+              1291
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 3300,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 600,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 1,
+            "waypoints": [
+              [
+                405,
+                943
+              ],
+              [
+                431,
+                1150
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3400,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 迎前抢上升点：跨一两步入底线内，球弹起时人已到位"
+          },
+          {
+            "dur": 1600,
+            "pos": [
+              70,
+              700
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.62)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "抢上升期击球"
+          },
+          {
+            "to": [
+              340,
+              70
+            ],
+            "dur": 900,
+            "from": [
+              277,
+              -14
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4300,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              431,
+              1150
+            ],
+            "dur": 300,
+            "from": [
+              431,
+              1800
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "opt_line"
+          },
+          {
+            "to": [
+              431,
+              1150
+            ],
+            "dur": 300,
+            "from": [
+              431,
+              1800
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "opt_cross"
+          }
+        ]
+      },
+      {
+        "t": 4600,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 2800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 决策瞬间：看红方站位偏向，拿不准优先斜线"
+          },
+          {
+            "dur": 2500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "opt_line",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                511,
+                160
+              ]
+            ]
+          },
+          {
+            "dur": 2500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "opt_cross",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                209,
+                160
+              ]
+            ]
+          },
+          {
+            "dur": 2800,
+            "pos": [
+              425,
+              235
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "① 直线落点：红方反手深区"
+          },
+          {
+            "dur": 2800,
+            "pos": [
+              95,
+              265
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "② 斜线落点：红方让出的角"
+          }
+        ]
+      },
+      {
+        "t": 7200,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              431,
+              1150
+            ],
+            "dur": 200,
+            "from": [
+              511,
+              160
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "opt_line"
+          },
+          {
+            "to": [
+              431,
+              1150
+            ],
+            "dur": 200,
+            "from": [
+              209,
+              160
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "opt_cross"
+          }
+        ]
+      },
+      {
+        "t": 7400,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 2600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑤ 直线：不越中线，直插红方反手深区"
+          },
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                511,
+                160
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "dur": 2600,
+            "pos": [
+              425,
+              235
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "① 直线落点：红方反手深区"
+          },
+          {
+            "dur": 2600,
+            "pos": [
+              150,
+              330
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.85)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "红方失位·被迫横移用反手处理深球"
+          }
+        ]
+      },
+      {
+        "t": 8100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              508,
+              162
+            ],
+            "dur": 1700,
+            "from": [
+              340,
+              70
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 10000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.72)",
+              "color": "#FFEB3B",
+              "fontSize": 18
+            },
+            "content": "↺ 回到击球瞬间：看第二种选择"
+          },
+          {
+            "to": [
+              340,
+              70
+            ],
+            "dur": 600,
+            "from": [
+              508,
+              162
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 250,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                511,
+                160
+              ],
+              [
+                431,
+                1150
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 10800,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 2600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑥ 斜线：飞越大对角，落进红方回位时让出的底线角"
+          },
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                209,
+                160
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "dur": 2600,
+            "pos": [
+              95,
+              235
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "② 斜线落点：红方让出的角"
+          },
+          {
+            "dur": 2600,
+            "pos": [
+              150,
+              330
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.85)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "红方被拉向大角·中路与反手侧全部空出"
+          }
+        ]
+      },
+      {
+        "t": 11500,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              212,
+              162
+            ],
+            "dur": 1700,
+            "from": [
+              340,
+              70
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 13400,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 2600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑦ 取舍：直线＝抢时间压反手、容错小；斜线＝容错高、拉出场外"
+          },
+          {
+            "dur": 250,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                209,
+                160
+              ],
+              [
+                431,
+                1150
+              ]
+            ]
+          },
+          {
+            "dur": 2600,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "opt_line",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                511,
+                160
+              ]
+            ]
+          },
+          {
+            "dur": 2600,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "opt_cross",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                431,
+                1150
+              ],
+              [
+                209,
+                160
+              ]
+            ]
+          },
+          {
+            "dur": 3600,
+            "pos": [
+              425,
+              235
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "① 直线：抢时间、压反手"
+          },
+          {
+            "dur": 3600,
+            "pos": [
+              95,
+              260
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 16
+            },
+            "content": "② 斜线：容错高、打空档"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "id": "tactic-approach-shot-net-attack-v5",
+  "name": "随球上网",
+  "category": "单打战术",
+  "introduction": "在底线相持过程中，当对手回球出浅、变软或落点在中场附近时，你主动向前移动，用一拍高质量的进攻球（通常打深或打角度）压迫对手，并顺势跟随球的飞行轨迹上网，在网前用截击或高压结束这一分。",
+  "purpose": "把底线相持主动转化为网前得分机会。随球上网的核心是用一拍好球“买”到上网的时间，让你在对手被动防守时占据网前，压缩对手回球角度和反应时间，从而快速结束回合。它比发球上网更灵活，不依赖发球质量，任何一次对手回球出浅都可以启动。",
+  "scenarios": "对手回球出浅、落点在发球线附近或更浅时。\n对手被大角度调动后勉强回球，质量下降明显时。\n你底线稳定，且有上网意识，网前截击手感尚可。\n对手穿越能力一般，你上网后他有压力时。\n需要改变节奏、打破底线僵局时。",
+  "tips": "1、浅球是启动信号，但不是所有浅球都要上：如果对手浅球质量不差（低、快、带强烈下旋），你勉强上网反而被动。判断标准是：你是否能在高点或舒服位置击球，如果不能，宁可留在底线。\n\n2、随球上网这一拍是“铺路”，不是“终结”：不要想着这一拍直接打死，重点是把球打深、打稳，让对手回球质量进一步下降。失误率高是业余选手随球上网失败的最大原因。\n\n3、击球方向与上网路线要匹配：如果你打直线深球，就沿直线方向上网，封住对手直线回球线路；如果你打斜线，就向斜线方向前移，同时注意对手打直线穿越的可能。不要打完后站在原地不动，也不要跑错方向。\n\n4、分腿垫步不可省：到达网前准备截击前，对手触球瞬间必须做分腿垫步，稳定重心再启动。直冲网前会导致截击时脚步凌乱。\n\n5、不要每球都想上网：随球上网是变化手段，频繁使用会被对手识破，对手会开始加力打深或挑高球。时机选择比次数更重要。\n\n6、挑高球的处理：如果对手擅长挑高球，上网时不要贴网太死，留出后退空间。看到对手拍面打开向上挑时，提前侧身后退准备高压。",
+  "protocolVersion": "5.0",
+  "source": {
+    "dbId": 19
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-approach-shot-net-attack-v5",
+      "name": "随球上网战术（时间轴对齐版）",
+      "author": "tennis17lai",
+      "version": "5.0",
+      "duration": 6300,
+      "description": "底线相持中对手回球出浅，我方主动前移打一拍直线深球压住对方，随后顺势上网，在网前截击得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "我方",
+        "radius": 18,
+        "initPos": [
+          360,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "对手",
+        "radius": 18,
+        "initPos": [
+          360,
+          40
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          360,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 底线相持，观察对手回球"
+          },
+          {
+            "to": [
+              365,
+              1225
+            ],
+            "dur": 400,
+            "from": [
+              360,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 1000,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                360,
+                1230
+              ],
+              [
+                360,
+                640
+              ],
+              [
+                360,
+                40
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 300,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              350,
+              50
+            ],
+            "dur": 800,
+            "from": [
+              360,
+              40
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1100,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFEB3B",
+              "fontSize": 18
+            },
+            "content": "对手回球出浅！上网时机出现"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                360,
+                40
+              ],
+              [
+                360,
+                640
+              ],
+              [
+                380,
+                980
+              ]
+            ]
+          },
+          {
+            "to": [
+              380,
+              45
+            ],
+            "dur": 600,
+            "from": [
+              350,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              380,
+              980
+            ],
+            "dur": 500,
+            "from": [
+              365,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFFFFF",
+              "fontSize": 20
+            },
+            "content": "② 移动中正手击球，直线压深"
+          },
+          {
+            "to": [
+              385,
+              970
+            ],
+            "dur": 100,
+            "from": [
+              380,
+              980
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 700,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                380,
+                980
+              ],
+              [
+                420,
+                640
+              ],
+              [
+                500,
+                60
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 2100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              495,
+              60
+            ],
+            "dur": 800,
+            "from": [
+              380,
+              45
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2700,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              420,
+              700
+            ],
+            "dur": 500,
+            "from": [
+              385,
+              970
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 2900,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "③ 对手被动救球，回球软且浅"
+          },
+          {
+            "dur": 600,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                495,
+                60
+              ],
+              [
+                420,
+                640
+              ],
+              [
+                420,
+                700
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3600,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "④ 网前截击，打直线空档得分！"
+          },
+          {
+            "to": [
+              415,
+              690
+            ],
+            "dur": 100,
+            "from": [
+              420,
+              700
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 500,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                420,
+                700
+              ],
+              [
+                150,
+                100
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              250,
+              90
+            ],
+            "dur": 700,
+            "from": [
+              495,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！随球上网制胜"
+          },
+          {
+            "to": [
+              410,
+              680
+            ],
+            "dur": 400,
+            "from": [
+              415,
+              690
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      }
+    ]
+  }
+}

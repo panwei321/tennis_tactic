@@ -1,0 +1,528 @@
+{
+  "id": "tactic-serve-volley-backhand-dropshot-v5",
+  "name": "二区内角发球上网反手小球战术",
+  "category": "单打战术",
+  "introduction": "在二区（左区/占先区）发内角球压迫对手，发球后顺势上网，在反手位用切削放小球到对手反手网前，迫使对手急停折返，随后移动到网前中路封堵直线，最后打正手空档终结。",
+  "purpose": " 利用内角发球让对手重心和跑动方向偏向一侧，紧接着放小球反向调动，制造“急停折返”的失衡效应。业余选手在这种情况下极易重心失控，回球质量大幅下降，给你轻松网前终结的机会。",
+  "scenarios": "对手接发球回球偏软、习惯性快速回中；\n你反手切削小球手感好；\n需要变化节奏、快速拿分时；\n对手移动能力一般或折返能力弱时效果更佳。",
+  "tips": "放小球的质量是关键，宁低勿高、宁短勿长，否则会被对手直接上网抢攻；\n发球必须有一定压迫性，否则对手回球太深或太凶，无法顺利放小球；\n放完小球后绝对不能站在原地看，必须立即向网前中路移动封堵直线；\n如果对手移动能力较弱，放小球可能直接得分，无需后续步骤。",
+  "protocolVersion": "5.0",
+  "source": {
+    "dbId": 22
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-serve-volley-backhand-dropshot-v5",
+      "name": "二区内角发球上网反手小球战术（小球落点优化版）",
+      "author": "tennis17lai",
+      "version": "5.0",
+      "duration": 6000,
+      "description": "二区内角发球压迫对手，发球后顺势上网至反手位，用反手切削放小球到对方反手网前，迫使对手从底线急奔往前救球仓促回击，随后移动到网前中路封堵直线，最后打正手空档终结得分。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#1F5D3B"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#1565C0",
+        "label": "发球方",
+        "radius": 18,
+        "initPos": [
+          320,
+          1230
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#C62828",
+        "label": "接发方",
+        "radius": 18,
+        "initPos": [
+          540,
+          50
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "radius": 6,
+        "initPos": [
+          320,
+          1230
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 900,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 二区内角发球，压迫追身"
+          },
+          {
+            "to": [
+              315,
+              1225
+            ],
+            "dur": 100,
+            "from": [
+              320,
+              1230
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 800,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [
+              0
+            ],
+            "waypoints": [
+              [
+                320,
+                1230
+              ],
+              [
+                400,
+                300
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              300,
+              950
+            ],
+            "dur": 800,
+            "from": [
+              315,
+              1225
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "to": [
+              420,
+              50
+            ],
+            "dur": 800,
+            "from": [
+              540,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 800,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 400,
+            "spin": "topspin",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                400,
+                300
+              ],
+              [
+                420,
+                50
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1200,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 700,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "接发方被动回球，球飞向发球方反手中场"
+          },
+          {
+            "to": [
+              415,
+              55
+            ],
+            "dur": 100,
+            "from": [
+              420,
+              50
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 800,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                420,
+                50
+              ],
+              [
+                300,
+                950
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1300,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              400,
+              60
+            ],
+            "dur": 400,
+            "from": [
+              415,
+              55
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 900,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 反手切削放小球"
+          },
+          {
+            "to": [
+              305,
+              940
+            ],
+            "dur": 100,
+            "from": [
+              300,
+              950
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 700,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [
+              0
+            ],
+            "waypoints": [
+              [
+                300,
+                950
+              ],
+              [
+                500,
+                580
+              ]
+            ],
+            "showBounceMark": true
+          }
+        ]
+      },
+      {
+        "t": 2100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              360,
+              700
+            ],
+            "dur": 500,
+            "from": [
+              305,
+              940
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "to": [
+              510,
+              570
+            ],
+            "dur": 800,
+            "from": [
+              400,
+              60
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2700,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 300,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                500,
+                580
+              ],
+              [
+                510,
+                570
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(198,40,40,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 16
+            },
+            "content": "③ 对手急停折返，第二跳前仓促救球"
+          },
+          {
+            "to": [
+              505,
+              575
+            ],
+            "dur": 100,
+            "from": [
+              510,
+              570
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "defender"
+          },
+          {
+            "dur": 700,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                510,
+                570
+              ],
+              [
+                360,
+                700
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3700,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 网前中路封堵，正手打空档终结"
+          },
+          {
+            "to": [
+              355,
+              690
+            ],
+            "dur": 100,
+            "from": [
+              360,
+              700
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          },
+          {
+            "dur": 600,
+            "spin": "none",
+            "type": "trajectory",
+            "curve": "linear",
+            "easing": "linear",
+            "target": "ball",
+            "bounces": [],
+            "waypoints": [
+              [
+                360,
+                700
+              ],
+              [
+                150,
+                50
+              ]
+            ],
+            "showBounceMark": true
+          },
+          {
+            "to": [
+              300,
+              100
+            ],
+            "dur": 800,
+            "from": [
+              505,
+              575
+            ],
+            "type": "move",
+            "easing": "easeInQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 4500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1200,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(0,0,0,0.7)",
+              "color": "#FFEB3B",
+              "fontSize": 22
+            },
+            "content": "得分！发球上网反手小球战术奏效"
+          },
+          {
+            "to": [
+              350,
+              680
+            ],
+            "dur": 400,
+            "from": [
+              355,
+              690
+            ],
+            "type": "move",
+            "easing": "easeOutQuad",
+            "target": "attacker"
+          }
+        ]
+      }
+    ]
+  }
+}

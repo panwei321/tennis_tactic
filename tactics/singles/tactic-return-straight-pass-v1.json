@@ -1,0 +1,358 @@
+{
+  "id": "tactic-return-straight-pass-v1",
+  "name": "接发球直线穿越（破发球上网）",
+  "category": "单打战术",
+  "introduction": "对手强势发球后立刻上网，你用接发这一拍把球低平地打进她让出的直线半场——球从她身边膝腰高度穿过，落进她反手侧深区。核心是\"低平 + 走直线 + 落点深\"，逼她在前冲中做低位截击。",
+  "purpose": "1、给他最难受的一拍：上网的人最想截的是齐胸高、能借力的球；膝腰高度的低位截击最难处理；\n2、用直线换时间：直线飞行比斜线短，球到他跟前更快，第一截击被迫在移动中完成；\n3、惩罚\"上网站中路\"：发球上网的人第一截击位置通常偏中路，代价就是直线一侧的空档——这个空档就是目标；\n4、心理层面：被穿一次，她下次上网的步点就会犹豫。",
+  "scenarios": "1、对手发球强势、发完就上网（或这一分她选择发球上网）；\n2、你接发能站得住（没被大外角彻底拉出场外），有把球压平的动作空间；\n3、对方第一截击位置偏中路或偏向另一侧，直线半场确实空着；\n4、硬地等弹跳规则的场地更划算（球低平，低位截击更难）；\n5、关键分、破发点等可以搏一下的局面。",
+  "tips": "1、容错比斜线低：直线过网点高、飞行短，球一旦挑高就是送截击——宁可压住高度打深，也不要打高；\n2、选线要在她发球前就想好：强势发球没有时间临场改主意；\n3、别打中路：中路覆盖面积最大，也是她第一截击最舒服的位置；\n4、遇到上网位置极好的对手（贴近网、正对直线），改打斜线或她脚下，别硬穿；\n5、击球点别拖到身后：被顶住时宁可早让位、用小幅动作把球\"挡\"成低平球；\n6、接一发的默认原则仍是稳（回中央、求深度）——直线穿越是看准了用的偷袭，不是每分都打。",
+  "protocolVersion": "1.0",
+  "source": {
+    "dbId": 25
+  },
+  "script": {
+    "meta": {
+      "id": "tactic-return-straight-pass-v1",
+      "name": "接发球直线穿越（破发球上网）",
+      "author": "tennis17lai",
+      "version": "1.0",
+      "duration": 7300,
+      "description": "对手强势发球后上网，你用接发这一拍把球低平地打进他让出的直线半场：球从她身边膝腰高度穿过，落进她反手侧深区。核心三要点：低平（过网余量 20–30cm）＋走直线（不越中线）＋落点深；容错比斜线低，宁可压住高度打深，也不要打高。"
+    },
+    "court": {
+      "width": 720,
+      "height": 1280,
+      "courtRect": {
+        "h": 1200,
+        "w": 560,
+        "x": 80,
+        "y": 40
+      },
+      "lineColor": "#FFFFFF",
+      "netPosition": 640,
+      "surfaceColor": "#0084D4"
+    },
+    "elements": [
+      {
+        "id": "attacker",
+        "type": "player",
+        "color": "#42A5F5",
+        "label": "蓝方·接发",
+        "radius": 18,
+        "initPos": [
+          527,
+          1291
+        ]
+      },
+      {
+        "id": "defender",
+        "type": "player",
+        "color": "#EF5350",
+        "label": "红方·上网",
+        "radius": 18,
+        "initPos": [
+          335,
+          -11
+        ]
+      },
+      {
+        "id": "ball",
+        "type": "ball",
+        "color": "#CCFF00",
+        "label": "",
+        "radius": 6,
+        "initPos": [
+          340,
+          14
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "t": 0,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "① 站位与预判：底线外贴单打边线延长线，守住直线"
+          }
+        ]
+      },
+      {
+        "t": 1000,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "② 红方外角强发，发完立刻上网"
+          },
+          {
+            "dur": 1000,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.7,
+            "waypoints": [
+              [
+                340,
+                14
+              ],
+              [
+                500,
+                948
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 1100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              360,
+              400
+            ],
+            "dur": 1500,
+            "from": [
+              335,
+              -11
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 1400,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              540,
+              1246
+            ],
+            "dur": 1300,
+            "from": [
+              527,
+              1291
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "attacker"
+          }
+        ]
+      },
+      {
+        "t": 1950,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 500,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "style": {
+              "dash": [
+                10,
+                7
+              ]
+            },
+            "easing": "linear",
+            "target": "ball",
+            "waypoints": [
+              [
+                500,
+                948
+              ],
+              [
+                545,
+                1218
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 2600,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 800,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.8)",
+              "color": "#FFFFFF",
+              "fontSize": 18
+            },
+            "content": "③ 红方前压中路，直线让出来"
+          },
+          {
+            "to": [
+              400,
+              430
+            ],
+            "dur": 500,
+            "from": [
+              360,
+              400
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 2500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1300,
+            "type": "trajectory",
+            "curve": "catmullrom",
+            "easing": "linear",
+            "target": "ball",
+            "clearance": 0.24,
+            "waypoints": [
+              [
+                545,
+                1218
+              ],
+              [
+                540,
+                90
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "t": 3100,
+        "type": "parallel",
+        "actions": [
+          {
+            "to": [
+              450,
+              450
+            ],
+            "dur": 300,
+            "from": [
+              400,
+              430
+            ],
+            "type": "move",
+            "easing": "easeInOutQuad",
+            "target": "defender"
+          }
+        ]
+      },
+      {
+        "t": 3300,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1000,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "④ 直线低平球：贴网而过，不越中线"
+          },
+          {
+            "dur": 1000,
+            "pos": [
+              140,
+              140
+            ],
+            "type": "text",
+            "st2le": {
+              "bg": "rgba(0,0,0,0.65)",
+              "color": "#FFEB3B",
+              "fontSize": 15
+            },
+            "content": "落点：红方反手深区"
+          }
+        ]
+      },
+      {
+        "t": 4350,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 600,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑤ 截击不及：球从对方身外膝腰高度穿过"
+          }
+        ]
+      },
+      {
+        "t": 5500,
+        "type": "parallel",
+        "actions": [
+          {
+            "dur": 1500,
+            "pos": [
+              70,
+              640
+            ],
+            "type": "text",
+            "style": {
+              "bg": "rgba(21,101,192,0.9)",
+              "color": "#FFEB3B",
+              "fontSize": 20
+            },
+            "content": "⑥ 直线空档得手：低平＋直线＋落点深"
+          }
+        ]
+      }
+    ]
+  }
+}
