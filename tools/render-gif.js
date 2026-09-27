@@ -26,10 +26,26 @@ try {
   console.error('缺少渲染依赖，请先在仓库根目录执行：npm install');
   process.exit(1);
 }
-const { createCanvas } = require('@napi-rs/canvas');
+const { createCanvas, GlobalFonts } = require('@napi-rs/canvas');
 const { GIFEncoder, quantize, applyPalette } = require('gifenc');
 
 const ROOT = path.resolve(__dirname, '..');
+
+// ============ 注册中文字体（修复 GIF 乱码） ============
+// tactic-preview.js 用 "Xpx sans-serif" 画文字；无头 canvas 解析不到 macOS 的 .ttc 中文字体，
+// 中文/带圈数字会渲染成方框。这里把含 CJK 字形的系统 ttf 注册为 sans-serif 家族。
+// 只影响无头渲染；浏览器播放器中 sans-serif 是泛型关键字，不受同名注册影响。
+const CJK_FONTS = [
+  '/System/Library/Fonts/Supplemental/Arial Unicode.ttf',      // macOS 全字库
+  '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',    // Linux Noto CJK
+  '/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc'
+];
+const cjkFont = CJK_FONTS.find(p => fs.existsSync(p));
+if (cjkFont) {
+  GlobalFonts.registerFromPath(cjkFont, 'sans-serif');
+} else {
+  console.warn('[提示] 未找到含中文字形的系统字体，GIF 中中文将显示为方框');
+}
 
 // ============ 参数解析 ============
 const args = process.argv.slice(2);
