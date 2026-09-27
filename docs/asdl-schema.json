@@ -379,6 +379,27 @@
         "showBounceMark": {
           "type": "boolean",
           "description": "制胜分最后一击设为 true"
+        },
+        "style": {
+          "type": "object",
+          "description": "线条外观。省略时用默认值：rgba(204,255,0,0.6) 实线、宽 2。用于区分真实击球轨迹与决策示意线路",
+          "properties": {
+            "color": {
+              "type": "string",
+              "description": "线色，任意 CSS 颜色"
+            },
+            "width": {
+              "type": "number",
+              "description": "线宽（屏幕像素），默认 2"
+            },
+            "dash": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "description": "虚线：段长与间隔（屏幕像素），如 [10,7]；空数组或省略 = 实线"
+            }
+          }
         }
       }
     }

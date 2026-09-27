@@ -92,6 +92,27 @@
     return { sortedTimes, actionsWithEndTime };
   }
 
+  // ==================== 场馆预留区 ====================
+  // 预留区 = 球场 + 底线外 3.2m + 双打边线外 1.83m（由 ITF 推荐 6.4m/3.66m 等比压缩，
+  // 兼顾球场占比与战术可读性；按球场宽高换算成 ASDL 单位比例）
+  const SIDE_MARGIN_RATIO = 1.83 / 10.973;
+  const BACK_MARGIN_RATIO = 3.2 / 23.77;
+
+  /** 三种标准场地的围场配色（美网式蓝+绿 / 温网式深绿 / 法网式深绿） */
+  const APRON_BY_SURFACE = {
+    '#0084d4': '#2E7D4F',
+    '#1f5d3b': '#0E3322',
+    '#c75b12': '#23513F'
+  };
+
+  /** #rrggbb 按比例变暗（非标准场地色的围场兜底） */
+  function shadeColor(hex, factor) {
+    const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || ''));
+    if (!m) return '#39635A';
+    const n = parseInt(m[1], 16);
+    return 'rgb(' + Math.round((n >> 16 & 255) * factor) + ',' + Math.round((n >> 8 & 255) * factor) + ',' + Math.round((n & 255) * factor) + ')';
+  }
+
   // ==================== 绘图工具 ====================
   /**
    * 绘制标准网球场（竖向俯视，无半场标签）。
@@ -118,6 +139,15 @@
 
     // 场地四角
     const c1 = proj(x, y), c2 = proj(x + w, y), c3 = proj(x + w, y + h), c4 = proj(x, y + h);
+
+    // 围场底色：以场馆矩形（预留区：底线外 3.2m、边线外 1.83m）为中心向四周
+    // 大幅延伸铺满画布（画布自动裁剪），场馆外不露页面底色；配色与场地高区分
+    const sideM = w * SIDE_MARGIN_RATIO;
+    const backM = h * BACK_MARGIN_RATIO;
+    const v1 = proj(x - sideM, y - backM), v2 = proj(x + w + sideM, y + h + backM);
+    ctx.fillStyle = colors.apron || APRON_BY_SURFACE[String(colors.surface).toLowerCase()] || shadeColor(colors.surface, 0.55);
+    const EXT = 1e4; // 远超任何画布尺寸
+    ctx.fillRect(v1.x - EXT, v1.y - EXT, (v2.x - v1.x) + 2 * EXT, (v2.y - v1.y) + 2 * EXT);
 
     // 场地底色
     ctx.fillStyle = colors.surface;
@@ -149,15 +179,16 @@
     moveLine(centerX, serviceTop, centerX, serviceBottom);
     ctx.stroke();
 
-    // 球网（横向、灰色加粗）
+    // 球网（横向、灰色加粗）；网柱位于双打边线外 0.457m（标准 0.914m 的一半）
+    const postOffset = w * (0.457 / 10.973);
     ctx.lineWidth = 4; ctx.strokeStyle = '#888';
     ctx.beginPath();
-    moveLine(x - 10, netY, x + w + 10, netY);
+    moveLine(x - postOffset, netY, x + w + postOffset, netY);
     ctx.stroke();
 
     // 网柱
     ctx.fillStyle = '#555';
-    const postA = proj(x - 10, netY), postB = proj(x + w + 10, netY);
+    const postA = proj(x - postOffset, netY), postB = proj(x + w + postOffset, netY);
     ctx.fillRect(postA.x - 3, postA.y - 5, 6, 10);
     ctx.fillRect(postB.x - 3, postB.y - 5, 6, 10);
   }
@@ -180,10 +211,12 @@
     }
   }
 
-  function drawTrajectory(ctx, waypoints, progress, proj) {
+  function drawTrajectory(ctx, waypoints, progress, proj, style) {
     if (!waypoints || waypoints.length < 2) return;
-    ctx.strokeStyle = 'rgba(204, 255, 0, 0.6)';
-    ctx.lineWidth = 2;
+    style = style || {};
+    ctx.strokeStyle = style.color || 'rgba(204, 255, 0, 0.6)';
+    ctx.lineWidth = style.width || 2;
+    ctx.setLineDash(style.dash || []);
     // 用 Catmull-Rom 曲线采样绘制，与球的运动路径完全一致，避免折射和后半段缺失
     var samples = 40;
     var drawSamples = Math.max(1, Math.floor(samples * progress));
@@ -196,6 +229,8 @@
       else ctx.lineTo(p.x, p.y);
     }
     ctx.stroke();
+    // 复位虚线状态：ctx 全局共用，不复位会把虚线漏给后面绘制的球员描边
+    ctx.setLineDash([]);
   }
 
   // ==================== TacticPreview 类 ====================
@@ -290,19 +325,21 @@
       this.offscreenCtx.setTransform(this._dpr, 0, 0, this._dpr, 0, 0);
     }
 
-    /** 计算投影参数（竖向俯视，直接映射） */
+    /** 计算投影参数（竖向俯视；取景范围 = 球场 + 预留区：底线外 3.2m、边线外 1.83m） */
     _computeProjection() {
-      const script = this.scriptData;
-      const cw = script.court.width;   // ASDL x 范围（边线方向）
-      const ch = script.court.height;  // ASDL y 范围（底线方向）
+      const cr = this.courtRect;
       const w = this._displayWidth;
       const h = this._displayHeight;
-      // 直接映射：水平=cw, 垂直=ch
-      const scale = Math.min(w / cw, h / ch);
+      // 场馆宽高（ASDL 单位），球场居中
+      const vw = cr.w * (1 + 2 * SIDE_MARGIN_RATIO);
+      const vh = cr.h * (1 + 2 * BACK_MARGIN_RATIO);
+      const scale = Math.min(w / vw, h / vh);
+      const cx = cr.x + cr.w / 2;
+      const cy = cr.y + cr.h / 2;
       this._proj = {
         scale,
-        offsetX: (w - cw * scale) / 2,
-        offsetY: (h - ch * scale) / 2
+        offsetX: w / 2 - cx * scale,
+        offsetY: h / 2 - cy * scale
       };
     }
 
@@ -360,7 +397,7 @@
       // 5. 绘制轨迹
       activeActions.forEach(({ action, progress }) => {
         if (action.type === 'trajectory' && action.waypoints) {
-          drawTrajectory(ctx, action.waypoints, progress, proj);
+          drawTrajectory(ctx, action.waypoints, progress, proj, action.style);
         }
       });
 
